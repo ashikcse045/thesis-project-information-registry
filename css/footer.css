@@ -1,0 +1,47 @@
+footer{
+    width: 100%;
+    min-height: 100px;
+    background-color: #395B64;
+    box-sizing: border-box;
+}
+
+.social_icon{
+    width: 100%;
+    text-align: center;
+    padding: 10px;
+}
+
+.social_icon a{
+    text-decoration: none;
+    font-size: 40px;
+    margin: 10px;
+    color: #E7F6F2;
+    transition: .4s;
+}
+
+.social_icon a:hover{
+    color: #c8e9e0;
+}
+
+.dev_info{
+    width: 100%;
+    text-align: center;
+    
+    
+}
+
+.dev_info .inner_div{
+    width: 50%;
+    margin: 0 auto;
+    padding: 10px;
+    color: #E7F6F2;
+    border-top: 2px solid #E7F6F2;
+}
+
+.dev_info .inner_div p{
+    margin-bottom: 5px;
+}
+
+.dev_info .inner_div p strong{
+    color: #CB4335;
+}

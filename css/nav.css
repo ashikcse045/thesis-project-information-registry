@@ -1,0 +1,112 @@
+/* @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap'); */
+
+/* logo font */
+@import url('https://fonts.googleapis.com/css2?family=Edu+NSW+ACT+Foundation:wght@600&family=Roboto:wght@300;900&display=swap');
+
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+
+.navigration{
+    width: 100%;
+    min-height: 15px;
+    padding: 0px 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    background-color: #395B64;
+    color: #E7F6F2;
+    /* margin-bottom: 30px; */
+}
+
+.navigration .logo{
+    width: 20%;
+    text-align: right;
+    /* padding: 5px;
+    box-sizing: border-box; */
+}
+
+.navigration .logo a{
+    text-decoration: none;
+}
+.navigration .logo img{
+    width: 80px;
+    /* padding: 5px; */
+}
+
+.navigration .nav{
+    width: 80%;
+    text-align: right;
+    /* padding: 5px; */
+    padding-right: 10%;
+}
+
+.navigration .nav ul{
+    list-style-type: none;
+}
+
+.navigration .nav ul li{
+    display: inline-block;
+    padding: 10px 5px;
+    position: relative;
+}
+
+.navigration .nav ul li a{
+    text-decoration: none;
+    padding: 10px 5px;
+    font-size: 20px;
+    text-transform: capitalize;
+    color: #E7F6F2;
+    transition: color 0.4s;
+}
+
+.navigration .nav ul li a:hover{
+    background-color: #426670;
+}
+
+.navigration .nav ul li .nested{
+    min-width: 200px;
+    background-color:#fff;
+    text-align: left;
+    position: absolute;
+    left: 0;
+    top: 130px;
+    /* background-color: #A5C9CA; */
+    border-radius: 9px;
+    box-shadow: 1px 0px 30px #88888842, -1px 1px 30px #88888842;
+    border-top: 5px solid #A5C9CA;
+    /* display: none; */
+    visibility: hidden;
+    opacity: 0.2;
+    overflow: hidden;
+    transition: 0.25s;
+    transition-timing-function: linear;
+}
+
+.navigration .nav ul li .nested li{
+    display: block;
+    /* width: 100%; */
+    padding: 0;
+}
+
+.navigration .nav ul li .nested li a{
+    color: #000;
+    display: block;
+    /* width: 100%; */
+}
+
+.navigration .nav ul li .nested li a:hover{
+    color: #E7F6F2;
+}
+
+.navigration .nav ul li:hover .nested{
+    visibility: visible;
+    left: 0;
+    top: 44px;
+    opacity: 1;
+}

@@ -1,0 +1,47 @@
+.content .content_box .form_div{
+    width: 100%;
+    padding: 2% 4%;
+}
+
+.content .content_box .form_div .box{
+    display: block;
+    margin-bottom: 20px;
+    
+}
+
+.content .content_box .form_div .box label{
+    display: block;
+    font-size: 20px;
+    margin-bottom: 7px;
+    color:#395B64;
+    font-weight: bold;
+    text-transform: capitalize;
+}
+
+.content .content_box .form_div .box input{
+    display: block;
+    font-size: 25px;
+    width: 100%;
+    border: 1px solid #395B64;
+    background-color: transparent;
+    outline: none;
+    box-shadow: none;
+    border-radius: 8px;
+    padding: 5px 3px;
+    color: #2C3333;
+}
+
+.content .content_box .form_div .btn input{
+    display: block;
+    text-transform: uppercase;
+    font-size: 25px;
+    width: 100%;
+    border: none;
+    background-color: #395B64;
+    outline: none;
+    box-shadow: none;
+    border-radius: 8px;
+    padding: 5px 3px;
+    color: #fff;
+    cursor:pointer;
+}

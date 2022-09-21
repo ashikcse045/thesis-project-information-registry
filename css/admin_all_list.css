@@ -1,0 +1,29 @@
+.container{
+    width: 100%;
+    padding: 2% 1%;
+}
+
+.container .side_nav{
+    width: 18%;
+
+}
+
+.container .content{
+    width: 80%;
+}
+
+.container .content .content_box .list_content{
+    padding: 20px 5px;
+}
+
+.container .content .content_box table{
+    padding: 5px;
+}
+
+.container .content .content_box table thead, tfoot{
+    text-transform: capitalize;
+}
+
+.dataTables_filter{
+    width: 100%;
+}
