@@ -1,6 +1,6 @@
 <div class="navigration">
         <div class="logo">
-            <a href="index.php">
+            <a href="../index.php">
                 <img src="../images/logo.svg" alt="logo">
             </a>
         </div>
