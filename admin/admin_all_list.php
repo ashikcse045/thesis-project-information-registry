@@ -5,7 +5,7 @@
 </script>
 
 <?php
-    require_once 'db_connection.php';
+    require_once '../partials/db_connection.php';
 ?>
 
 <!DOCTYPE html>
@@ -15,14 +15,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>admin</title>
-    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="icon" type="image/x-icon" href="../favicon.ico">
 
     
-    <link rel="stylesheet" href="fontawesome-6/css/all.css">
-    <link rel="stylesheet" href="css/nav.css">
-    <link rel="stylesheet" href="css/admin.css">
-    <link rel="stylesheet" href="css/footer.css">
-    <link rel="stylesheet" href="css/admin_all_list.css">
+    <link rel="stylesheet" href="../fontawesome-6/css/all.css">
+    <link rel="stylesheet" href="../css/nav.css">
+    <link rel="stylesheet" href="../css/admin.css">
+    <link rel="stylesheet" href="../css/footer.css">
+    <link rel="stylesheet" href="../css/admin_all_list.css">
 
     <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.2.3/css/buttons.dataTables.min.css">
@@ -30,11 +30,11 @@
 </head>
 <body>
     
-    <?php require_once 'partials/nav.php' ?>
+    <?php require_once '../partials/nav.php' ?>
 
     <div class="container">
         
-        <?php require_once 'partials/admin_side_nav.php' ?>
+        <?php require_once 'admin_side_nav.php' ?>
 
         <div class="content">
             <div class="content_box">
@@ -113,7 +113,7 @@
         </div>
     </div>
     
-    <?php require_once 'partials/footer.php' ?>
+    <?php require_once '../partials/footer.php' ?>
 
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>

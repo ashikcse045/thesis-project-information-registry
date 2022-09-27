@@ -14,7 +14,7 @@
     <link rel="icon" type="image/x-icon" href="favicon.ico">
 </head>
 <body>
-    <?php require_once 'partials/nav.php' ?>
+    <?php require_once 'partials/nav_index.php' ?>
 
     <div class="container">
         <div class="row">

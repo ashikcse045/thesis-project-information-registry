@@ -5,7 +5,7 @@
 </script>
 
 <?php
-    require_once 'db_connection.php';
+    require_once '../partials/db_connection.php';
 
     $today = date("Y-m-d");
     $sv_uid = $_SESSION['sv_id'];
@@ -487,23 +487,23 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register</title>
-    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="icon" type="image/x-icon" href="../favicon.ico">
 
     
-    <link rel="stylesheet" href="fontawesome-6/css/all.css">
-    <link rel="stylesheet" href="css/nav.css">
-    <link rel="stylesheet" href="css/supervisor.css">
-    <link rel="stylesheet" href="css/register.css">
-    <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="../fontawesome-6/css/all.css">
+    <link rel="stylesheet" href="../css/nav.css">
+    <link rel="stylesheet" href="../css/supervisor.css">
+    <link rel="stylesheet" href="../css/register.css">
+    <link rel="stylesheet" href="../css/footer.css">
 
 </head>
 <body>
     
-    <?php require_once 'partials/nav.php' ?>
+    <?php require_once '../partials/nav.php' ?>
 
     <div class="container">
         
-        <?php require_once 'partials/sv_side_nav.php' ?>
+        <?php require_once 'sv_side_nav.php' ?>
 
         
 
@@ -698,9 +698,9 @@
         </div>
     </div>
 
-    <?php require_once 'partials/footer.php' ?>
+    <?php require_once '../partials/footer.php' ?>
 
-    <script src="js/register.js"></script>
+    <script src="../js/register.js"></script>
 
 </body>
 </html>

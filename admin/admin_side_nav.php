@@ -20,7 +20,7 @@
             <div class="nav_content">
                 <div class="about">
                     <div class="profile_pic">
-                        <img src="supervisor_imgs/supervisor.png" alt="">
+                        <img src="../supervisor_imgs/supervisor.png" alt="">
                     </div>
                     <div class="name">
                         <h2><?php echo $ad_name ?></h2>
