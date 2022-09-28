@@ -30,7 +30,8 @@
     
                 <div class="dashbord">
                     <ul>
-                        <li><a href="supervisor_profile.php">thesis list</a></li>
+                        <li><a href="supervisor_profile.php">dashboard</a></li>
+                        <li><a href="sv_thesis_list.php">thesis list</a></li>
                         <li><a href="project_list.php">project list</a></li>
                         <li><a href="register.php">register new</a></li>
                         <li><a href="#">account setting</a></li>

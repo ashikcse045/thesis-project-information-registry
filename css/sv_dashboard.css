@@ -1,0 +1,26 @@
+.content_box{
+    min-height: 550px;
+}
+.das_box{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+
+    padding: 3%;
+
+}
+
+.das_box a{
+    text-decoration: none;
+    width: 25%;
+    background-color: #395B64;
+    color: #E7F6F2;
+    min-height: 120px;
+    text-align: center;
+}
+
+.das_box .box{
+    
+}
