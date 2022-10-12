@@ -22,5 +22,6 @@
 }
 
 .das_box .box{
-    
+    padding: 45px 0;
+    text-transform: capitalize;
 }

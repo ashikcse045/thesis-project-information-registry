@@ -119,7 +119,7 @@
                                     ?>
                                     
                                     <li>
-                                        <a href="#">
+                                        <a href="edit_thesis_project_single.php?id=<?php echo $row['stu_id'] ?>">
                                             <div class="detail">
                                                 <ul>
                                                     <li><i class="fa-solid fa-id-card"></i><span><?php echo $row['stu_id'] ?></span></li>

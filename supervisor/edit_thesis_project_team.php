@@ -14,13 +14,115 @@
     // $row = mysqli_fetch_array($query);
     $sv_ref = $sv_uid;
 
+    $team = $_GET['team'];
+
+    $sql = "select * from thesis_project_info where team_id = '$team'";
+    $query = mysqli_query($conn, $sql);
+
+    if(mysqli_num_rows($query) > 0)
+    {
+        // $row = mysqli_fetch_array($query);
+        $name = array();
+        $id = array();
+        $batch = array();
+        $credit = array();
+        $semester = array();
+
+        while($row = mysqli_fetch_array($query))
+        {
+            $title = $row['title'];
+            $catagory = $row['catagory'];
+            $st_session = $row['st_session'];
+            $end_session = $row['end_session'];
+            $old_file = $row['report'];
+
+            array_push($name, $row['stu_name']);
+            array_push($id, $row['stu_id']);
+            array_push($batch, $row['batch']);
+            array_push($credit, $row['credit']);
+            array_push($semester, $row['semester']);
+        }
+        
+        
+        $st = explode("-", $st_session);
+        $s_sName = $st[0];
+        $s_sYear = $st[1];
+
+        $end = explode("-", $end_session);
+        $e_sName = $end[0];
+        $e_sYear = $end[1];  
+
+        $count = mysqli_num_rows($query);
+        if($count === 1)
+        {
+            $m1_name = $name[0];
+            $m1_id = $id[0];
+            $m1_batch = $batch[0];
+            $m1_credit = $credit[0];
+            $m1_semester = $semester[0];
+
+            $id1 = $id[0];
+        }
+        else if($count === 2)
+        {
+            $m1_name = $name[0];
+            $m1_id = $id[0];
+            $m1_batch = $batch[0];
+            $m1_credit = $credit[0];
+            $m1_semester = $semester[0];
+            $id1 = $id[0];
+            
+            $m2_name = $name[1];
+            $m2_id = $id[1];
+            $m2_batch = $batch[1];
+            $m2_credit = $credit[1];
+            $m2_semester = $semester[1];
+            $id2 = $id[1];
+        }
+        else if($count === 3)
+        {
+            $m1_name = $name[0];
+            $m1_id = $id[0];
+            $m1_batch = $batch[0];
+            $m1_credit = $credit[0];
+            $m1_semester = $semester[0];
+            $id1 = $id[0];
+            
+            $m2_name = $name[1];
+            $m2_id = $id[1];
+            $m2_batch = $batch[1];
+            $m2_credit = $credit[1];
+            $m2_semester = $semester[1];
+            $id2 = $id[1];
+
+            $m3_name = $name[2];
+            $m3_id = $id[2];
+            $m3_batch = $batch[2];
+            $m3_credit = $credit[2];
+            $m3_semester = $semester[2];
+            $id3 = $id[2];
+        }
+       
+    }
+
+    if(isset($_POST['view']))
+    {
+        $file = '../uploads/'.$old_file;
+        $filename = $old_file;
+        header('Content-type: application/pdf');
+        // header('Content-Disposition: inline; filename="' . $filename . '"');
+        // header('Content-Transfer-Encoding: binary');
+        // header('Content-Length: ' . filesize($file));
+        // header('Accept-Ranges: bytes');
+        @readfile($file);
+    }
+
     if(isset($_POST['submit']))
     {
         $one_valid = true;
         $two_valid = true;
         $all_valid = true;
-        $team_id = "cse_".rand(10000,99999);
-        
+
         // $_POST = array();
         // title check 
         if(!empty($_POST['title']))
@@ -243,239 +345,367 @@
         }
 
         // FILE VALIDATION
-        
         // >>** SUBMIT THE FORM **<<
+        if(!empty($_FILES['file']['name']))
+            {
+                $upload_dir = "../uploads/";
+                $file_name = basename($_FILES['file']['name']);
+                $temp_name = $_FILES['file']['tmp_name'];
+                $file_type = $_FILES['file']['type'];
+                $file_size = $_FILES['file']['size'];
+                $file_size = $file_size/(1024*1024);
+                $ext = pathinfo($file_name, PATHINFO_EXTENSION);
+
+                $replace_name = $team.".".$ext;
+                $target_dir = $upload_dir.$replace_name;
+                // echo $replace_name;
+
+                if($ext === 'pdf')
+                {
+                    if($file_size < 5)
+                    {
+                        if($all_valid && $two_valid && $one_valid)
+                        {
+                            //all
+                            $sql = "UPDATE thesis_project_info
+                                    SET
+                                    stu_id = ( CASE stu_id
+                                                WHEN '$id1' THEN '$m1_id'
+                                                WHEN '$id2' THEN '$m2_id'
+                                                WHEN '$id3' THEN '$m3_id'
+                                                END),
+                                    stu_name = ( CASE stu_id
+                                                WHEN '$id1' THEN '$m1_name'
+                                                WHEN '$id2' THEN '$m2_name'
+                                                WHEN '$id3' THEN '$m3_name'
+                                                END),
+                                    batch = ( CASE stu_id
+                                                WHEN '$id1' THEN '$m1_batch'
+                                                WHEN '$id2' THEN '$m2_batch'
+                                                WHEN '$id3' THEN '$m3_batch'
+                                                END),
+                                    semester = ( CASE stu_id
+                                                WHEN '$id1' THEN '$m1_semester'
+                                                WHEN '$id2' THEN '$m2_semester'
+                                                WHEN '$id3' THEN '$m3_semester'
+                                                END),
+                                    credit = ( CASE stu_id
+                                                WHEN '$id1' THEN '$m1_credit'
+                                                WHEN '$id2' THEN '$m2_credit'
+                                                WHEN '$id3' THEN '$m3_credit'
+                                                END), 
+                                    title = ( CASE stu_id
+                                                WHEN '$id1' THEN '$title'
+                                                WHEN '$id2' THEN '$title'
+                                                WHEN '$id3' THEN '$title'
+                                                END),
+                                    catagory = ( CASE stu_id
+                                                WHEN '$id1' THEN '$catagory'
+                                                WHEN '$id2' THEN '$catagory'
+                                                WHEN '$id3' THEN '$catagory'
+                                                END),
+                                    st_session = ( CASE stu_id
+                                                WHEN '$id1' THEN '$st_session'
+                                                WHEN '$id2' THEN '$st_session'
+                                                WHEN '$id3' THEN '$st_session'
+                                                END),
+                                    end_session = ( CASE stu_id
+                                                WHEN '$id1' THEN '$end_session'
+                                                WHEN '$id2' THEN '$end_session'
+                                                WHEN '$id3' THEN '$end_session'
+                                                END),
+                                    report = ( CASE stu_id
+                                                WHEN '$id1' THEN '$replace_name'
+                                                WHEN '$id2' THEN '$replace_name'
+                                                WHEN '$id3' THEN '$replace_name'
+                                                END)
+                                    WHERE stu_id IN ('$id1', '$id2', '$id3') ";
+                            
+
+                            unlink('../uploads/'.$old_file);
+                            if(mysqli_query($conn, $sql) && move_uploaded_file($temp_name, $target_dir))
+                            {
+
+                                echo "<script>alert('updated sucessfully')</script>";
+                            }
+                            else{
+                                echo "<script>alert('error in query')</script>";
+                            }
+
+                        }
+                        else if($two_valid && !isset($m3_name) && $one_valid)
+                        {
+                            // two
+                            $sql = "UPDATE thesis_project_info
+                                    SET
+                                    stu_id = ( CASE stu_id
+                                                WHEN '$id1' THEN '$m1_id'
+                                                WHEN '$id2' THEN '$m2_id'
+                                                END),
+                                    stu_name = ( CASE stu_id
+                                                WHEN '$id1' THEN '$m1_name'
+                                                WHEN '$id2' THEN '$m2_name'
+                                                END),
+                                    batch = ( CASE stu_id
+                                                WHEN '$id1' THEN '$m1_batch'
+                                                WHEN '$id2' THEN '$m2_batch'
+                                                END),
+                                    semester = ( CASE stu_id
+                                                WHEN '$id1' THEN '$m1_semester'
+                                                WHEN '$id2' THEN '$m2_semester'
+                                                END),
+                                    credit = ( CASE stu_id
+                                                WHEN '$id1' THEN '$m1_credit'
+                                                WHEN '$id2' THEN '$m2_credit'
+                                                END), 
+                                    title = ( CASE stu_id
+                                                WHEN '$id1' THEN '$title'
+                                                WHEN '$id2' THEN '$title'
+                                                END),
+                                    catagory = ( CASE stu_id
+                                                WHEN '$id1' THEN '$catagory'
+                                                WHEN '$id2' THEN '$catagory'
+                                                END),
+                                    st_session = ( CASE stu_id
+                                                WHEN '$id1' THEN '$st_session'
+                                                WHEN '$id2' THEN '$st_session'
+                                                END),
+                                    end_session = ( CASE stu_id
+                                                WHEN '$id1' THEN '$end_session'
+                                                WHEN '$id2' THEN '$end_session'
+                                                END),
+                                    report = ( CASE stu_id
+                                                WHEN '$id1' THEN '$replace_name'
+                                                WHEN '$id2' THEN '$replace_name'
+                                                END)
+                                    WHERE stu_id IN ('$id1', '$id2') ";
+
+                            unlink('../uploads/'.$old_file);
+                            if(mysqli_query($conn, $sql) && move_uploaded_file($temp_name, $target_dir))
+                            {
+                                echo "<script>alert('updated sucessfully')</script>";
+                            }
+                            else{
+                                echo "<script>alert('error in query')</script>";
+                            }
+                        }
+                        else if($one_valid && !isset($m2_name) && !isset($m3_name))
+                        {
+                            // one
+                            $sql = "UPDATE thesis_project_info
+                                    SET
+                                    stu_id = ( CASE stu_id
+                                                WHEN '$id1' THEN '$m1_id'
+                                                END),
+                                    stu_name = ( CASE stu_id
+                                                WHEN '$id1' THEN '$m1_name'
+                                                END),
+                                    batch = ( CASE stu_id
+                                                WHEN '$id1' THEN '$m1_batch'
+                                                END),
+                                    semester = ( CASE stu_id
+                                                WHEN '$id1' THEN '$m1_semester'
+                                                END),
+                                    credit = ( CASE stu_id
+                                                WHEN '$id1' THEN '$m1_credit'
+                                                END), 
+                                    title = ( CASE stu_id
+                                                WHEN '$id1' THEN '$title'
+                                                END),
+                                    catagory = ( CASE stu_id
+                                                WHEN '$id1' THEN '$catagory'
+                                                END),
+                                    st_session = ( CASE stu_id
+                                                WHEN '$id1' THEN '$st_session'
+                                                END),
+                                    end_session = ( CASE stu_id
+                                                WHEN '$id1' THEN '$end_session'
+                                                END),
+                                    report = ( CASE stu_id
+                                                WHEN '$id1' THEN '$replace_name'
+                                                END)
+                                    WHERE stu_id IN ('$id1') ";
+
+                            unlink('../uploads/'.$old_file);
+                            if(mysqli_query($conn, $sql) && move_uploaded_file($temp_name, $target_dir))
+                            {
+                                echo "<script>alert('updated sucessfully')</script>";
+                            }
+                            else{
+                                echo "<script>alert('error in query')</script>";
+                            }
+                        }
+                    }
+                    else{
+                        $file_error = "* file must be less then 5 Mb";
+                        echo "<script>alert('file must be less then 5 Mb')</script>";
+                    }
+                }
+                else{
+                    $file_error = "* the file was not PDF";
+                    echo "<script>alert('file was not PDF')</script>";
+                }
+
+                
+            }
+            else{
+                // NO FILE
+                if($all_valid && $two_valid && $one_valid)
+                {
+                    //all
+                    $sql = "UPDATE thesis_project_info
+                            SET
+                            stu_id = ( CASE stu_id
+                                        WHEN '$id1' THEN '$m1_id'
+                                        WHEN '$id2' THEN '$m2_id'
+                                        WHEN '$id3' THEN '$m3_id'
+                                        END),
+                            stu_name = ( CASE stu_id
+                                        WHEN '$id1' THEN '$m1_name'
+                                        WHEN '$id2' THEN '$m2_name'
+                                        WHEN '$id3' THEN '$m3_name'
+                                        END),
+                            batch = ( CASE stu_id
+                                        WHEN '$id1' THEN '$m1_batch'
+                                        WHEN '$id2' THEN '$m2_batch'
+                                        WHEN '$id3' THEN '$m3_batch'
+                                        END),
+                            semester = ( CASE stu_id
+                                        WHEN '$id1' THEN '$m1_semester'
+                                        WHEN '$id2' THEN '$m2_semester'
+                                        WHEN '$id3' THEN '$m3_semester'
+                                        END),
+                            credit = ( CASE stu_id
+                                        WHEN '$id1' THEN '$m1_credit'
+                                        WHEN '$id2' THEN '$m2_credit'
+                                        WHEN '$id3' THEN '$m3_credit'
+                                        END), 
+                            title = ( CASE stu_id
+                                        WHEN '$id1' THEN '$title'
+                                        WHEN '$id2' THEN '$title'
+                                        WHEN '$id3' THEN '$title'
+                                        END),
+                            catagory = ( CASE stu_id
+                                        WHEN '$id1' THEN '$catagory'
+                                        WHEN '$id2' THEN '$catagory'
+                                        WHEN '$id3' THEN '$catagory'
+                                        END),
+                            st_session = ( CASE stu_id
+                                        WHEN '$id1' THEN '$st_session'
+                                        WHEN '$id2' THEN '$st_session'
+                                        WHEN '$id3' THEN '$st_session'
+                                        END),
+                            end_session = ( CASE stu_id
+                                        WHEN '$id1' THEN '$end_session'
+                                        WHEN '$id2' THEN '$end_session'
+                                        WHEN '$id3' THEN '$end_session'
+                                        END)
+                            WHERE stu_id IN ('$id1', '$id2', '$id3') ";
+
+                    if(mysqli_query($conn, $sql))
+                    {
+                        echo "<script>alert('updated sucessfully')</script>";
+                    }
+                    else{
+                        echo "<script>alert('error in query')</script>";
+                    }
+                }
+                else if($two_valid && !isset($m3_name) && $one_valid)
+                {
+                    // two
+                    $sql = "UPDATE thesis_project_info
+                            SET
+                            stu_id = ( CASE stu_id
+                                        WHEN '$id1' THEN '$m1_id'
+                                        WHEN '$id2' THEN '$m2_id'
+                                        END),
+                            stu_name = ( CASE stu_id
+                                        WHEN '$id1' THEN '$m1_name'
+                                        WHEN '$id2' THEN '$m2_name'
+                                        END),
+                            batch = ( CASE stu_id
+                                        WHEN '$id1' THEN '$m1_batch'
+                                        WHEN '$id2' THEN '$m2_batch'
+                                        END),
+                            semester = ( CASE stu_id
+                                        WHEN '$id1' THEN '$m1_semester'
+                                        WHEN '$id2' THEN '$m2_semester'
+                                        END),
+                            credit = ( CASE stu_id
+                                        WHEN '$id1' THEN '$m1_credit'
+                                        WHEN '$id2' THEN '$m2_credit'
+                                        END), 
+                            title = ( CASE stu_id
+                                        WHEN '$id1' THEN '$title'
+                                        WHEN '$id2' THEN '$title'
+                                        END),
+                            catagory = ( CASE stu_id
+                                        WHEN '$id1' THEN '$catagory'
+                                        WHEN '$id2' THEN '$catagory'
+                                        END),
+                            st_session = ( CASE stu_id
+                                        WHEN '$id1' THEN '$st_session'
+                                        WHEN '$id2' THEN '$st_session'
+                                        END),
+                            end_session = ( CASE stu_id
+                                        WHEN '$id1' THEN '$end_session'
+                                        WHEN '$id2' THEN '$end_session'
+                                        END)
+                            WHERE stu_id IN ('$id1', '$id2') ";
+                    
+                    if(mysqli_query($conn, $sql))
+                    {
+                        echo "<script>alert('updated sucessfully')</script>";
+                    }
+                    else{
+                        echo "<script>alert('error in query')</script>";
+                    }
+                }
+                else if($one_valid && !isset($m2_name) && !isset($m3_name))
+                {
+                    // one
+                    $sql = "UPDATE thesis_project_info
+                            SET
+                            stu_id = ( CASE stu_id
+                                        WHEN '$id1' THEN '$m1_id'
+                                        END),
+                            stu_name = ( CASE stu_id
+                                        WHEN '$id1' THEN '$m1_name'
+                                        END),
+                            batch = ( CASE stu_id
+                                        WHEN '$id1' THEN '$m1_batch'
+                                        END),
+                            semester = ( CASE stu_id
+                                        WHEN '$id1' THEN '$m1_semester'
+                                        END),
+                            credit = ( CASE stu_id
+                                        WHEN '$id1' THEN '$m1_credit'
+                                        END), 
+                            title = ( CASE stu_id
+                                        WHEN '$id1' THEN '$title'
+                                        END),
+                            catagory = ( CASE stu_id
+                                        WHEN '$id1' THEN '$catagory'
+                                        END),
+                            st_session = ( CASE stu_id
+                                        WHEN '$id1' THEN '$st_session'
+                                        END),
+                            end_session = ( CASE stu_id
+                                        WHEN '$id1' THEN '$end_session'
+                                        END)
+                            WHERE stu_id IN ('$id1') ";
+                    
+                    if(mysqli_query($conn, $sql))
+                    {
+                        echo "<script>alert('updated sucessfully')</script>";
+                    }
+                    else{
+                        echo "<script>alert('error in query')</script>";
+                    }
+                }
+            }
         
-        if($all_valid && $two_valid && $one_valid)
-        {
-            if(!empty($_FILES['file']['name']))
-            {
-                $upload_dir = "../uploads/";
-                $file_name = basename($_FILES['file']['name']);
-                $temp_name = $_FILES['file']['tmp_name'];
-                $file_type = $_FILES['file']['type'];
-                $file_size = $_FILES['file']['size'];
-                $file_size = $file_size/(1024*1024);
-                $ext = pathinfo($file_name, PATHINFO_EXTENSION);
-
-                $replace_name = $team_id.".".$ext;
-
-                $target_dir = $upload_dir.$replace_name;
-                // echo $replace_name;
-
-                if($ext === 'pdf')
-                {
-                    if($file_size < 5)
-                    {
-                        //code
-                        $sql = "insert into thesis_project_info (stu_id, stu_name, batch, semester, credit, title, catagory, st_session, end_session, sv_ref, upload_date, report, team_id) 
-                                values 
-                                ('$m1_id', '$m1_name', '$m1_batch', '$m1_semester', '$m1_credit', '$title', '$catagory', '$st_session', '$end_session', '$sv_ref', '$today', '$replace_name', '$team_id'),
-
-                                ('$m2_id', '$m2_name', '$m2_batch', '$m2_semester', '$m2_credit', '$title', '$catagory', '$st_session', '$end_session', '$sv_ref', '$today', '$replace_name', '$team_id'),
-
-                                ('$m3_id', '$m3_name', '$m3_batch', '$m3_semester', '$m3_credit', '$title', '$catagory', '$st_session', '$end_session', '$sv_ref', '$today', '$replace_name', '$team_id')";
-
-                        if(mysqli_query($conn, $sql) && move_uploaded_file($temp_name, $target_dir))
-                        {
-                            $m1_id = '';
-                            $m1_name = '';
-                            $m1_batch = '';
-                            $m1_semester = '';
-                            $m1_credit = '';
-                            $m2_id = '';
-                            $m2_name = '';
-                            $m2_batch = '';
-                            $m2_semester = '';
-                            $m2_credit = '';
-                            $m3_id = '';
-                            $m3_name = '';
-                            $m3_batch = '';
-                            $m3_semester = '';
-                            $m3_credit = '';
-                            $title = '';
-                            $catagory = '';
-                            $st_session = '';
-                            $end_session = '';
-                            $s_sName = '';
-                            $s_sYear = '';
-                            $e_sName = '';
-                            $e_sYear = '';
-                            $sv_ref = '';
-                            $today = '';
-                            $replace_name = '';     
-                            echo "<script>alert('form submited sucessfully')</script>";
-                        }
-                        else{
-                            echo "<script>alert('error! not submit')</script>";
-                        }
-                    }
-                    else{
-                        $file_error = "* file must be less then 5 Mb";
-                        echo "<script>alert('file must be less then 5 Mb')</script>";
-                    }
-                }
-                else{
-                    $file_error = "* the file was not PDF";
-                    echo "<script>alert('file was not PDF')</script>";
-                }
-
-                
-            }
-            else{
-                $file_error = "* please select a PDF file";
-                echo "<script>alert('select a PDF file')</script>";
-            }
-
-        }
-
-        else if($two_valid && !isset($m3_name) && $one_valid)
-        {
-            if(!empty($_FILES['file']['name']))
-            {
-                $upload_dir = "../uploads/";
-                $file_name = basename($_FILES['file']['name']);
-                $temp_name = $_FILES['file']['tmp_name'];
-                $file_type = $_FILES['file']['type'];
-                $file_size = $_FILES['file']['size'];
-                $file_size = $file_size/(1024*1024);
-                
-                $ext = pathinfo($file_name, PATHINFO_EXTENSION);
-                $replace_name = $team_id.".".$ext;
-
-                $target_dir = $upload_dir.$replace_name;
-                // echo $replace_name;
-
-                if($ext === 'pdf')
-                {
-                    if($file_size < 5)
-                    {
-                        //code
-                        $sql = "insert into thesis_project_info (stu_id, stu_name, batch, semester, credit, title, catagory, st_session, end_session, sv_ref, upload_date, report, team_id) 
-                                values 
-                                ('$m1_id', '$m1_name', '$m1_batch', '$m1_semester', '$m1_credit', '$title', '$catagory', '$st_session', '$end_session', '$sv_ref', '$today', '$replace_name', '$team_id'),
-
-                                ('$m2_id', '$m2_name', '$m2_batch', '$m2_semester', '$m2_credit', '$title', '$catagory', '$st_session', '$end_session', '$sv_ref', '$today', '$replace_name', '$team_id')";
-
-                        if(mysqli_query($conn, $sql) && move_uploaded_file($temp_name, $target_dir))
-                        {
-                            $m1_id = '';
-                            $m1_name = '';
-                            $m1_batch = '';
-                            $m1_semester = '';
-                            $m1_credit = '';
-                            $m2_id = '';
-                            $m2_name = '';
-                            $m2_batch = '';
-                            $m2_semester = '';
-                            $m2_credit = '';
-                            $title = '';
-                            $catagory = '';
-                            $st_session = '';
-                            $end_session = '';
-                            $s_sName = '';
-                            $s_sYear = '';
-                            $e_sName = '';
-                            $e_sYear = '';
-                            $sv_ref = '';
-                            $today = '';
-                            $replace_name = '';
-                            echo "<script>alert('form submited sucessfully')</script>";
-                        }
-                        else{
-                            echo "<script>alert('error! not submit')</script>";
-                        }
-                    }
-                    else{
-                        $file_error = "* file must be less then 5 Mb";
-                        echo "<script>alert('file must be less then 5 Mb')</script>";
-                    }
-                }
-                else{
-                    $file_error = "* the file was not PDF";
-                    echo "<script>alert('file was not PDF')</script>";
-                }
-
-                
-            }
-            else{
-                $file_error = "* please select a PDF file";
-                echo "<script>alert('select a PDF file')</script>";
-            }
-
-        }
         
-        else if($one_valid && !isset($m2_name) && !isset($m3_name))
-        {
-            if(!empty($_FILES['file']['name']))
-            {
-                $upload_dir = "../uploads/";
-                $file_name = basename($_FILES['file']['name']);
-                $temp_name = $_FILES['file']['tmp_name'];
-                $file_type = $_FILES['file']['type'];
-                $file_size = $_FILES['file']['size'];
-                $file_size = $file_size/(1024*1024);
-                $ext = pathinfo($file_name, PATHINFO_EXTENSION);
-
-                $replace_name = $team_id.".".$ext;
-                $target_dir = $upload_dir.$replace_name;
-                // echo $replace_name;
-
-                if($ext === 'pdf')
-                {
-                    if($file_size < 5)
-                    {
-                        //code
-                        $sql = "insert into thesis_project_info (stu_id, stu_name, batch, semester, credit, title, catagory, st_session, end_session, sv_ref, upload_date, report, team_id) 
-                                values 
-                                ('$m1_id', '$m1_name', '$m1_batch', '$m1_semester', '$m1_credit', '$title', '$catagory', '$st_session', '$end_session', '$sv_ref', '$today', '$replace_name', '$team_id')";
-
-                        if(mysqli_query($conn, $sql) && move_uploaded_file($temp_name, $target_dir))
-                        {
-                            $m1_id = '';
-                            $m1_name = '';
-                            $m1_batch = '';
-                            $m1_semester = '';
-                            $m1_credit = '';
-                            $title = '';
-                            $catagory = '';
-                            $st_session = '';
-                            $end_session = '';
-                            $s_sName = '';
-                            $s_sYear = '';
-                            $e_sName = '';
-                            $e_sYear = '';
-                            $sv_ref = '';
-                            $today = '';
-                            $replace_name = '';
-                            echo "<script>alert('form submited sucessfully')</script>";
-                        }
-                        else{
-                            echo "<script>alert('error! not submit')</script>";
-                        }
-                    }
-                    else{
-                        $file_error = "* file must be less then 5 Mb";
-                        echo "<script>alert('file must be less then 5 Mb')</script>";
-                    }
-                }
-                else{
-                    $file_error = "* the file was not PDF";
-                    echo "<script>alert('file was not PDF')</script>";
-                }
-
-                
-            }
-            else{
-                $file_error = "* please select a PDF file";
-                echo "<script>alert('select a PDF file')</script>";
-            }
-
-        }
-        else{
-            // echo "something wrong!";
-            echo "<script>alert('form not valid')</script>";
-        }
 
     }
 ?>
@@ -486,7 +716,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register</title>
+    <title>Edit team info</title>
     <link rel="icon" type="image/x-icon" href="../favicon.ico">
 
     
@@ -510,7 +740,7 @@
         <div class="content">
             <div class="content_box">
                 <div class="page_title">
-                    <h1>register now</h1>
+                    <h1>edit team info</h1>
                 </div>
 
                 <div class="form_div">
@@ -684,6 +914,11 @@
                             <label for="file"><i class="fa-solid fa-upload"></i>Choose a report...</label>
                             <span id="file-chosen"></span>
                             <p class="error_msg"><?php echo isset($file_error) ? $file_error : '' ?></p>
+                        </div>
+
+                        <!-- <b>Old file: </b><i><?php echo $old_file; ?></i> -->
+                        <div class="fields">
+                            <button name="view" style="padding: 10px 15px; cursor: pointer;"><b>Old file: </b><i><?php echo $old_file; ?></i></button>
                         </div>
         
                         <div class="fields">

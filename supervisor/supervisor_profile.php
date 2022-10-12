@@ -38,17 +38,17 @@
                 </div>
 
                     <div class="das_box">
-                        <a href="#">
+                        <a href="sv_thesis_list.php">
                             <div class="box">
                                 <h2>thesis</h2>
                             </div>
                         </a>
-                        <a href="#">
+                        <a href="project_list.php">
                             <div class="box">
                                 <h2>project</h2>
                             </div>
                         </a>
-                        <a href="#">
+                        <a href="register.php">
                             <div class="box">
                                 <h2>register</h2>
                             </div>
