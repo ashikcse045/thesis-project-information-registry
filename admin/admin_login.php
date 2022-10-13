@@ -29,7 +29,7 @@
             if(mysqli_num_rows($query) === 1)
             {
                 $_SESSION['ad_id'] = $email;
-                header("Location: admin.php");
+                header("Location: admin_profile.php");
             }
         }
         else{

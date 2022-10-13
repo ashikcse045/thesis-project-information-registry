@@ -56,7 +56,7 @@
             <div class="content_box">
 
                     <div class="filter">
-                        <form action="admin.php" method="POST">
+                        <form action="admin_thesis_list.php" method="POST">
                             <div class="filter_option">
                                 <select name="batch" id="">
                                     <option value="0">select batch</option>
