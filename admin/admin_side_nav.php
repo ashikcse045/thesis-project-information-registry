@@ -31,9 +31,13 @@
                 <div class="dashbord">
                     <ul>
                         <li><a href="admin_profile.php">dashboard</a></li>
+
+                        <li><a href="admin_all_list.php">all list</a></li>
                         <li><a href="admin_thesis_list.php">thesis list</a></li>
                         <li><a href="admin_project_list.php">project list</a></li>
-                        <li><a href="admin_all_list.php">all list</a></li>
+
+                        <li><a href="students.php">supervisor student's</a></li>
+
                         <li><a href="report_gen.php">genarate report</a></li>
                         <li><a href="supervisor_list.php">supervisor</a></li>
                         <li><a href="add_supervisor.php">add supervisor</a></li>
