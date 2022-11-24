@@ -1,13 +1,14 @@
 .container{
     width: 100%;
     display: block;
-
+    padding: 2%;
+    min-height: calc(100vh - 114px);
 }
 
 .container .login_box{
     width: 30%;
     min-height: 50%;
-    margin: 2% auto;
+    margin: auto;
     padding: 1rem;
     box-shadow: 1px 1px 10px #395B64;
     
