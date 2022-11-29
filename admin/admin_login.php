@@ -5,11 +5,36 @@
 </script>
 
 <?php
-    require_once 'db_connection.php';
+    require_once '../partials/db_connection.php';
 
-    if(isset($_SESSION['sv_id']))
+    if(isset($_SESSION['ad_id']))
     {
-        header("Location: supervisor_profile.php");
+        header("Location: admin.php");
+    }
+
+    if(isset($_POST['login']))
+    {
+        if(!empty($_POST['email']) && !empty($_POST['pass']))
+        {
+            
+            $email = test_input($conn, $_POST['email']);
+            $pass = test_input($conn, $_POST['pass']);
+            
+            $pass = md5($pass);
+            // echo $pass;
+
+            $sql = "select * from a_d_m_i_n where email = '$email' and password = '$pass'";
+            $query = mysqli_query($conn, $sql);
+
+            if(mysqli_num_rows($query) === 1)
+            {
+                $_SESSION['ad_id'] = $email;
+                header("Location: admin_profile.php");
+            }
+        }
+        else{
+            $error = "* invalid username or password";
+        }
     }
 
     function test_input($con, $data) 
@@ -19,32 +44,7 @@
         return $data;
     }
 
-    $valid = true;
-    if(isset($_POST['login']))
-    {
-        if(!empty($_POST['email']) && !empty($_POST['pass']))
-        {
-            
-            $email = test_input($conn, $_POST['email']);
-            $pass = test_input($conn, $_POST['pass']);
-            $pass = md5($pass);
-            
-            // $pass = md5($pass);
-            // echo $pass;
 
-            $sql = "select * from sv_table where sv_email = '$email' and pass = '$pass'";
-            $query = mysqli_query($conn, $sql);
-
-            if(mysqli_num_rows($query) === 1)
-            {
-                $_SESSION['sv_id'] = $email;
-                header("Location: supervisor_profile.php");
-            }
-        }
-        else{
-            $error = "* invalid username or password";
-        }
-    }
 
 ?>
 
@@ -55,25 +55,26 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" href="fontawesome-6/css/all.css">
-    <link rel="stylesheet" href="css/login.css">
-    <link rel="stylesheet" href="css/nav.css">
-    <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="../css/admin_login.css">
+    <link rel="stylesheet" href="../css/nav.css">
+    <link rel="stylesheet" href="../css/footer.css">
+    
 
-    <title>login</title>
-    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <title>admin login</title>
+    <link rel="icon" type="image/x-icon" href="../favicon.ico">
 </head>
 <body>
 
-    <?php require_once 'partials/nav.php' ?>
+    <?php require_once '../partials/nav.php' ?>
 
     <div class="container">
         <div class="login_box">
             <form action="" method="POST">
                 <div class="icon">
                     <!-- <i class="fa-solid fa-user-large"></i> -->
-                    <img src="images/user.svg" alt="">
-                    <p>Sign in to start your session</p>
+                    <img src="../images/user_admin4.svg" alt="">
+                    <p>admin login</p>
                 </div>
                 <div class="fields">
                     <label for="email"><i class="fa-solid fa-envelope"></i></label>
@@ -93,7 +94,7 @@
         </div>
     </div>
 
-    <?php require_once 'partials/footer.php' ?>
+    <?php require_once '../partials/footer.php' ?>
     
 </body>
 </html>

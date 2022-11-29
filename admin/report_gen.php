@@ -5,7 +5,7 @@
 </script>
 
 <?php
-require_once 'db_connection.php';
+require_once '../partials/db_connection.php';
 
 $batch = '0';
 $semester = '0';
@@ -36,24 +36,24 @@ if(isset($_POST['filter']))
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>genarate report</title>
-    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="icon" type="image/x-icon" href="../favicon.ico">
 
 
-    <link rel="stylesheet" href="fontawesome-6/css/all.css">
-    <link rel="stylesheet" href="css/nav.css">
-    <link rel="stylesheet" href="css/supervisor.css">
-    <link rel="stylesheet" href="css/footer.css">
-    <link rel="stylesheet" href="css/report_gen.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="../css/nav.css">
+    <link rel="stylesheet" href="../css/supervisor.css">
+    <link rel="stylesheet" href="../css/footer.css">
+    <link rel="stylesheet" href="../css/report_gen.css">
 
 </head>
 
 <body>
 
-    <?php require_once 'partials/nav.php' ?>
+    <?php require_once '../partials/nav.php' ?>
 
     <div class="container">
 
-        <?php require_once 'partials/admin_side_nav.php' ?>
+        <?php require_once 'admin_side_nav.php' ?>
 
         <div class="content">
             <div class="content_box">
@@ -201,7 +201,7 @@ if(isset($_POST['filter']))
         </div>
     </div>
 
-    <?php require_once 'partials/footer.php' ?>
+    <?php require_once '../partials/footer.php' ?>
 
     <script type="text/javascript" src="https://unpkg.com/xlsx@0.15.1/dist/xlsx.full.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.22/pdfmake.min.js"></script>

@@ -5,7 +5,7 @@
 </script>
 
 <?php
-    require_once 'db_connection.php';
+    require_once '../partials/db_connection.php';
 
     $batch = '0';
     $semester = '0';
@@ -34,28 +34,29 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>admin project list</title>
-    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <title>admin</title>
+    <link rel="icon" type="image/x-icon" href="../favicon.ico">
 
     
-    <link rel="stylesheet" href="fontawesome-6/css/all.css">
-    <link rel="stylesheet" href="css/nav.css">
-    <link rel="stylesheet" href="css/supervisor.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="../css/nav.css">
+    <link rel="stylesheet" href="../css/admin.css">
+    <link rel="stylesheet" href="../css/footer.css">
 
 </head>
 <body>
     
-    <?php require_once 'partials/nav.php' ?>
+    <?php require_once '../partials/nav.php' ?>
 
     <div class="container">
         
-        <?php require_once 'partials/admin_side_nav.php' ?>
-        
+        <?php require_once 'admin_side_nav.php' ?>
+
         <div class="content">
             <div class="content_box">
 
-                <div class="filter">
-                        <form action="admin_project_list.php" method="POST">
+                    <div class="filter">
+                        <form action="admin_thesis_list.php" method="POST">
                             <div class="filter_option">
                                 <select name="batch" id="">
                                     <option value="0">select batch</option>
@@ -102,13 +103,13 @@
                     </div>
 
                 <div class="page_title">
-                    <h1>project list</h1>
+                    <h1>thesis list</h1>
                 </div>
 
                 <div class="list_content">
                     <ul>
                         <?php
-                            $sql = "SELECT * FROM thesis_project_info tp inner join sv_table sv on tp.sv_ref = sv.sv_email where tp.batch = '$batch' and tp.semester = '$semester' and end_session = '$ex_session' and catagory = 'project'";
+                            $sql = "SELECT * FROM thesis_project_info tp inner join sv_table sv on tp.sv_ref = sv.sv_email where tp.batch = '$batch' and tp.semester = '$semester' and end_session = '$ex_session' and catagory = 'thesis'";
                             // echo $sv_uid;
                             $query = mysqli_query($conn, $sql);
                             if(mysqli_num_rows($query) > 0)
@@ -144,6 +145,7 @@
             
         </div>
     </div>
-
+    
+    <?php require_once '../partials/footer.php' ?>
 </body>
 </html>

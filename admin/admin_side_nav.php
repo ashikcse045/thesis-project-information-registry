@@ -20,7 +20,7 @@
             <div class="nav_content">
                 <div class="about">
                     <div class="profile_pic">
-                        <img src="supervisor_imgs/supervisor.png" alt="">
+                        <img src="../supervisor_imgs/supervisor.png" alt="">
                     </div>
                     <div class="name">
                         <h2><?php echo $ad_name ?></h2>
@@ -30,9 +30,14 @@
     
                 <div class="dashbord">
                     <ul>
-                        <li><a href="admin.php">thesis list</a></li>
-                        <li><a href="admin_project_list.php">project list</a></li>
+                        <li><a href="admin_profile.php">dashboard</a></li>
+
                         <li><a href="admin_all_list.php">all list</a></li>
+                        <li><a href="admin_thesis_list.php">thesis list</a></li>
+                        <li><a href="admin_project_list.php">project list</a></li>
+
+                        <li><a href="students.php">supervisor student's</a></li>
+
                         <li><a href="report_gen.php">genarate report</a></li>
                         <li><a href="supervisor_list.php">supervisor</a></li>
                         <li><a href="add_supervisor.php">add supervisor</a></li>

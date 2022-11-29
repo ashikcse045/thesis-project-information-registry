@@ -1,0 +1,84 @@
+.list_content{
+    padding: 2%;
+}
+
+.filter{
+    width: 100%;
+    padding: 2%;
+
+}
+
+.filter .filter_option{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: initial;
+}
+
+.filter .filter_option .options{
+    width: 20%;
+    display: block;
+    margin-right: 15px;
+    /* min-height: 70px; */
+    /* position: relative; */
+    
+}
+
+.filter .filter_option .options select, input{
+    width: 100%;
+    font-size: 20px;
+    padding: 5px 3px;
+    /* position: absolute;
+    bottom: 0; */
+}
+
+.filter .filter_option .options label{
+    width: 100%;
+    display: block;
+    font-size: 18px;
+    padding: 5px 3px;
+    /* margin-bottom: 5px; */
+    text-transform: capitalize;
+    /* position: absolute;
+    top: 0; */
+}
+
+.filter .filter_option input[type=submit]{
+    cursor: pointer;
+}
+
+
+.list_content .export_btns{
+    margin-bottom: 20px;
+}
+.list_content .export_btns button{
+    padding: 7px 10px;
+    background-color: #395B64;
+    color: #E7F6F2;
+    font-size: 20px;
+    text-transform: uppercase;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.list_content table{
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.list_content table, th, td {
+    border: 1px solid;
+}
+
+.list_content table th, td {
+    padding: 5px 5px;
+}
+
+.list_content table th{
+    text-transform: capitalize;
+}
+
+.dataTables_filter{
+    margin-bottom: 30px;
+}

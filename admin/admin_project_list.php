@@ -5,7 +5,7 @@
 </script>
 
 <?php
-    require_once 'db_connection.php';
+    require_once '../partials/db_connection.php';
 
     $batch = '0';
     $semester = '0';
@@ -25,6 +25,7 @@
         }
 
     }
+
 ?>
 
 <!DOCTYPE html>
@@ -33,29 +34,28 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>supervisor</title>
-    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <title>admin project list</title>
+    <link rel="icon" type="image/x-icon" href="../favicon.ico">
 
     
-    <link rel="stylesheet" href="fontawesome-6/css/all.css">
-    <link rel="stylesheet" href="css/nav.css">
-    <link rel="stylesheet" href="css/supervisor.css">
-    <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="../css/nav.css">
+    <link rel="stylesheet" href="../css/supervisor.css">
 
 </head>
 <body>
     
-    <?php require_once 'partials/nav.php' ?>
+    <?php require_once '../partials/nav.php' ?>
 
     <div class="container">
         
-        <?php require_once 'partials/sv_side_nav.php' ?>
+        <?php require_once 'admin_side_nav.php' ?>
         
         <div class="content">
             <div class="content_box">
 
-                    <div class="filter">
-                        <form action="project_list.php" method="POST">
+                <div class="filter">
+                        <form action="admin_project_list.php" method="POST">
                             <div class="filter_option">
                                 <select name="batch" id="">
                                     <option value="0">select batch</option>
@@ -107,44 +107,43 @@
 
                 <div class="list_content">
                     <ul>
-                    <?php
-                        $sql = "select * from thesis_project_info where catagory = 'project' and sv_ref = '$sv_uid' and batch = '$batch' and semester = '$semester' and end_session = '$ex_session'";
-                        $query = mysqli_query($conn, $sql);
-                        if(mysqli_num_rows($query) > 0)
-                        {
-                            while($row = mysqli_fetch_array($query))
+                        <?php
+                            $sql = "SELECT * FROM thesis_project_info tp inner join sv_table sv on tp.sv_ref = sv.sv_email where tp.batch = '$batch' and tp.semester = '$semester' and end_session = '$ex_session' and catagory = 'project'";
+                            // echo $sv_uid;
+                            $query = mysqli_query($conn, $sql);
+                            if(mysqli_num_rows($query) > 0)
                             {
-                                ?>
+                                while($row = mysqli_fetch_array($query))
+                                {
+                                    ?>
+                                    
+                                    <li>
+                                        <a href="#">
+                                            <div class="detail">
+                                                <ul>
+                                                    <li><i class="fa-solid fa-id-card"></i><span><?php echo $row['stu_id'] ?></span></li>
+                                                    <li><i class="fa-solid fa-user-graduate"></i><span><?php echo $row['stu_name'] ?></span></li>
+                                                    <li><i class="fa-regular fa-calendar-days"></i><?php echo $row['upload_date'] ?></li>
+                                                    <li><i class="fa-solid fa-cloud-arrow-up"></i><?php echo $row['sv_name'] ?></li>
+                                                </ul>
+                                            </div>
+                                            <div class="title">
+                                                <p><?php echo $row['title'] ?></p>
+                                            </div>
+                                        </a>
+                                    </li>
+
+                                    <?php
+                                }
                                 
-                                <li>
-                                    <a href="#">
-                                        <div class="detail">
-                                            <ul>
-                                                <li><i class="fa-solid fa-id-card"></i><span><?php echo $row['stu_id'] ?></span></li>
-                                                <li><i class="fa-solid fa-user-graduate"></i><span><?php echo $row['stu_name'] ?></span></li>
-                                                <li><i class="fa-regular fa-calendar-days"></i><?php echo $row['upload_date'] ?></li>
-                                            </ul>
-                                        </div>
-                                        <div class="title">
-                                            <p><?php echo $row['title'] ?></p>
-                                        </div>
-                                    </a>
-                                </li>
-
-                                <?php
                             }
-                            
-                        }
-                    ?>
+                        ?>
                     </ul>
-
                 </div>
             </div>
             
         </div>
     </div>
-
-    <?php require_once 'partials/footer.php' ?>
 
 </body>
 </html>

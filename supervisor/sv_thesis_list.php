@@ -5,7 +5,7 @@
 </script>
 
 <?php
-    require_once 'db_connection.php';
+    require_once '../partials/db_connection.php';
 
     $batch = '0';
     $semester = '0';
@@ -35,28 +35,28 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>supervisor</title>
-    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="icon" type="image/x-icon" href="../favicon.ico">
 
     
-    <link rel="stylesheet" href="fontawesome-6/css/all.css">
-    <link rel="stylesheet" href="css/nav.css">
-    <link rel="stylesheet" href="css/supervisor.css">
-    <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="../css/nav.css">
+    <link rel="stylesheet" href="../css/supervisor.css">
+    <link rel="stylesheet" href="../css/footer.css">
 
 </head>
 <body>
     
-    <?php require_once 'partials/nav.php' ?>
+    <?php require_once '../partials/nav.php' ?>
 
     <div class="container">
         
-        <?php require_once 'partials/sv_side_nav.php' ?>
+        <?php require_once 'sv_side_nav.php' ?>
 
         <div class="content">
             <div class="content_box">
 
                     <div class="filter">
-                        <form action="supervisor_profile.php" method="POST">
+                        <form action="sv_thesis_list.php" method="POST">
                             <div class="filter_option">
                                 <select name="batch" id="">
                                     <option value="0">select batch</option>
@@ -119,7 +119,7 @@
                                     ?>
                                     
                                     <li>
-                                        <a href="#">
+                                        <a href="edit_thesis_project_single.php?id=<?php echo $row['stu_id'] ?>">
                                             <div class="detail">
                                                 <ul>
                                                     <li><i class="fa-solid fa-id-card"></i><span><?php echo $row['stu_id'] ?></span></li>
@@ -145,7 +145,7 @@
         </div>
     </div>
 
-    <?php require_once 'partials/footer.php' ?>
+    <?php require_once '../partials/footer.php' ?>
 
 </body>
 </html>
