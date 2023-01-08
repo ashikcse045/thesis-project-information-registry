@@ -1,0 +1,13 @@
+.content .content_box table{
+    width: 100%;
+    /* border: 2px solid #000; */
+}
+
+.content .content_box table, tr, td, th{
+    border: 1px solid #000;
+    border-collapse: collapse;
+}
+
+.content .content_box table tr th, td{
+    padding: 10px 5px;
+}

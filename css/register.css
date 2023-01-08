@@ -14,34 +14,26 @@
     
 }
 
-.content .form_div .error_msg{
-    color: red;
-    font-weight: bold;
-}
-
-.content .form_div .fields label{
-    display: block;
-    font-size: 25px;
-    margin-bottom: 7px;
-}
-.content .form_div .bdr{
-    color:#395B64;
-    font-weight: bold;
-}
-
-
-.content .form_div .fields input{
-    display: block;
+.content .form_div .fields select{
+    display: inline-block;
     font-size: 25px;
     width: 100%;
-    border: 1px solid #395B64;
+    border: 2px solid #395B64;
     background-color: transparent;
     outline: none;
     box-shadow: none;
     border-radius: 8px;
     padding: 5px 3px;
     color: #2C3333;
+    margin-bottom: 20px;
+    margin-right: 0;
 }
+
+.content .form_div .error_msg{
+    color: red;
+    font-weight: bold;
+}
+
 
 .content .form_div .fields input#file{
     display: none;
@@ -61,103 +53,84 @@
     margin-right: 5px;
 }
 
-.content .form_div .radio label{
-    display: inline-block;
-}
-.content .form_div .radio input{
-    display: inline-block;
-    width: initial;
-    margin-right: 5px;
-    height: 17px; 
-    width: 17px;
-}
 
-.content .form_div .members{
-    display: block;
-    width: 100%;
-    margin-bottom: 20px;
-}
-
-.content .form_div .members label{
-    display: block;
-    width: 100%;
-    font-size: 25px;
-    margin-bottom: 7px;
-}
-
-.content .form_div .members .member_about{
-    display: block;
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    /* justify-content: space-between; */
-}
-
-.content .form_div .members .member_about .nested_box{
-    width: 50%;
-    margin-bottom: 10px;
-}
-.content .form_div .members .member_about .nested_box:nth-child(odd){
-    padding: 0 10px 0 0;
-}
-.content .form_div .members .member_about .nested_box:nth-child(even){
-    padding: 0 0 0 10px;
-}
-
-.content .form_div .members .member_about .nested_box label{
-    display: block;
-    color: #395B64;
-    font-size: 20px;
-    font-weight: bold;
-    text-transform: capitalize;
-}
-
-.content .form_div .members .member_about .nested_box input{
-    display: block;
-    width: 100%;
-    font-size: 25px;
-    border: 1px solid #395B64;
-    background-color: transparent;
-    outline: none;
-    box-shadow: none;
-    border-radius: 8px;
-    padding: 2px 5px;
-    color: #2C3333;
-    /* margin: 12px 15px; */
-}
-
-.content .form_div .select-box{
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-between;
-}
-
-.content .form_div .dates select{
-    display: inline-block;
-    width: 47%;
-    font-size: 25px;
-    margin-right: 5px;
-    border: 1px solid #395B64;
-    background-color: transparent;
-    outline: none;
-    box-shadow: none;
-    border-radius: 8px;
-    padding: 2px 1.2rem;
-    color: #2C3333;
-}
-
-.content .form_div .dates select option{
-    /* background-color: #030809; */
-    box-shadow: none;
-}
 
 .content .form_div .fields #submit{
-    width: 150px;
+    width: 100%;
     height: 50px;
     margin-top: 30px;
     border: none;
     background: rgb(27, 241, 116);
+    border-radius: 10px;
+    color: #fff;
+    font-size: 20px;
+    font-weight: 600;
     cursor: pointer;
+}
+
+@media only screen and (min-width: 992px){
+    .content .form_div{
+        width: 100%;
+        /* border-radius: 15px; */
+        padding: 25px;
+        /* border: 2px solid #395B64 */
+        /* background: #030809a1; */
+        /* box-shadow: 1px 1px 10px #395B64; */
+    }
+
+    .content .form_div .fields{
+        display: block;
+        margin-bottom: 20px;
+        
+    }
+
+    .content .form_div .fields select{
+        display: inline-block;
+        font-size: 25px;
+        width: 30%;
+        border: 2px solid #395B64;
+        background-color: transparent;
+        outline: none;
+        box-shadow: none;
+        border-radius: 8px;
+        padding: 5px 3px;
+        color: #2C3333;
+        margin-right: 20px;
+        margin-bottom: 0;
+    }
+
+    .content .form_div .error_msg{
+        color: red;
+        font-weight: bold;
+    }
+
+
+    .content .form_div .fields input#file{
+        display: none;
+    }
+    .content .form_div .fields input#file + label{
+        display: inline-block;
+        color: #395B64;
+        padding: 8px 10px;
+        border: 2px solid #395B64;
+        font-size: 20px;
+        font-weight: bold;
+        cursor: pointer;
+        border-radius: 8px;
+        margin-top: 20px;
+    }
+    .content .form_div .fields input#file + label i{
+        margin-right: 5px;
+    }
+
+
+
+    .content .form_div .fields #submit{
+        width: 150px;
+        height: 50px;
+        margin-top: 30px;
+        border: none;
+        background: rgb(27, 241, 116);
+        cursor: pointer;
+    }
 }

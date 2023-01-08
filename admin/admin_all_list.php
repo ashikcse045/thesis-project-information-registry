@@ -1,171 +1,248 @@
 <script>
-    if ( window.history.replaceState ) {
-     window.history.replaceState( null, null, window.location.href );
-}
+    if (window.history.replaceState) {
+        window.history.replaceState(null, null, window.location.href);
+    }
 </script>
 
 <?php
-    require_once '../partials/db_connection.php';
+require_once '../partials/db_connection.php';
+$page = 'all_list';
 
-    if(isset($_POST['view']))
-    {
-        $old_file = $_POST['file'];
-        $file = '../uploads/'.$old_file;
-        $filename = $old_file;
-        header('Content-type: application/pdf');
-        @readfile($file);
+if (isset($_POST['search'])) {
+    if (!empty($_POST['search_option'])) {
+        $search_option = $_POST['search_option'];
     }
+    if (!empty($_POST['value'])) {
+        $value = htmlspecialchars($_POST['value']);
+    }
+}
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin All List</title>
+    <title>thesis project list</title>
     <link rel="icon" type="image/x-icon" href="../favicon.ico">
 
-    
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+        integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- data table -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/autofill/2.5.1/css/autoFill.dataTables.min.css">
+
     <link rel="stylesheet" href="../css/nav.css">
-    <link rel="stylesheet" href="../css/admin.css">
+    <link rel="stylesheet" href="../css/side_nav.css">
     <link rel="stylesheet" href="../css/footer.css">
+    <link rel="stylesheet" href="../css/thesis_project_list.css">
     <link rel="stylesheet" href="../css/admin_all_list.css">
 
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
-    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.2.3/css/buttons.dataTables.min.css">
-
 </head>
+
 <body>
-    
+
     <?php require_once '../partials/nav.php' ?>
 
     <div class="container">
-        
+
         <?php require_once 'admin_side_nav.php' ?>
 
         <div class="content">
             <div class="content_box">
-
                 <div class="page_title">
-                    <h1>all list</h1>
+                    <h1><i class="fa-solid fa-square-caret-right" id="side_arow"></i> thesis / project list</h1>
+                </div>
+
+                <div class="search">
+                    <form action="admin_all_list.php" method="POST">
+                        <div class="search_option">
+
+                            <select name="search_option" id="">
+                                <option value="0" <?php if (isset($search_option)) {
+                                    if ($search_option === "0") {
+                                        echo
+                                            "selected";
+                                    }
+                                } ?>>
+                                    select search option
+                                </option>
+                                <option value="id" <?php if (isset($search_option)) {
+                                    if ($search_option === "id") {
+                                        echo
+                                            "selected";
+                                    }
+                                } ?>>
+                                    id
+                                </option>
+                                <option value="name" <?php if (isset($search_option)) {
+                                    if ($search_option === "name") {
+                                        echo "selected";
+                                    }
+                                } ?>>
+                                    name
+                                </option>
+                                <option value="title" <?php if (isset($search_option)) {
+                                    if ($search_option === "title") {
+                                        echo "selected";
+                                    }
+                                } ?>>
+                                    title
+                                </option>
+                                <option value="semester" <?php if (isset($search_option)) {
+                                    if ($search_option === "semester") {
+                                        echo "selected";
+                                    }
+                                } ?>>
+                                    semester
+                                </option>
+                                <!-- <option value="exam" <?php if (isset($search_option)) {
+                                    if ($search_option === "exam") {
+                                        echo "selected";
+                                    }
+                                } ?>>
+                                    exam
+                                </option> -->
+                            </select>
+
+                            <input type="text" name="value" value="<?php echo isset($value) ? $value : "" ?>">
+
+                            <input type="submit" name="search" value="search">
+                        </div>
+
+                    </form>
                 </div>
 
                 <div class="list_content">
-                    
-                    <table id="example" class="display">
+                    <table id="myTable" class="display">
                         <thead>
                             <tr>
-                                <th>student id</th>
-                                <th>student name</th>
-                                <th>title</th>
-                                <th>batch</th>
+                                <th>name</th>
+                                <th>id</th>
                                 <th>semester</th>
-                                <th>exam session</th>
-                                <th>catagory</th>
-                                <th>upload date</th>
-                                <th>supervisor name</th>
-                                <th>action</th>
-                                <!-- <th>delete</th> -->
+                                <th>title</th>
+                                <th>supervisor</th>
+                                <th>credit</th>
                             </tr>
                         </thead>
                         <tfoot>
-                        <tr>
-                                <th>student id</th>
-                                <th>student name</th>
-                                <th>title</th>
-                                <th>batch</th>
+                            <tr>
+                                <th>name</th>
+                                <th>id</th>
                                 <th>semester</th>
-                                <th>exam session</th>
-                                <th>catagory</th>
-                                <th>upload date</th>
-                                <th>supervisor name</th>
-                                <th>action</th>
-                                <!-- <th>delete</th> -->
+                                <th>title</th>
+                                <th>supervisor</th>
+                                <th>credit</th>
                             </tr>
                         </tfoot>
-
                         <tbody>
-                        <?php
-                                $sql = "SELECT * FROM thesis_project_info tp inner join sv_table sv on tp.sv_ref = sv.sv_email";
-                                // echo $sv_uid;
+                            <?php
+                            if (!isset($_POST['search'])) {
+                                $sql = "SELECT * FROM students  ORDER BY title ASC";
                                 $query = mysqli_query($conn, $sql);
-                                if(mysqli_num_rows($query) > 0)
-                                {
-                                    while($row = mysqli_fetch_array($query))
-                                    {
+                                if (mysqli_num_rows($query) > 0) {
+                                    while ($row = mysqli_fetch_array($query)) {
                                         ?>
-                                        
-                                            <tr>
-                                                <td><?php echo $row['stu_id'] ?></td>
-                                                <td><?php echo $row['stu_name'] ?></td>
-                                                
-                                                
-                                                <td>
-                                                    <form action="" method="POST">
-                                                        <input type="hidden" name="file" value="<?php echo $row['report'] ?>">
-                                                        <button name="view" style="padding: 10px 15px; cursor: pointer; border: none;">
-                                                            <?php echo $row['title'] ?>
-                                                        </button>
-                                                    </form>
-                                                </td>
-
-                                                <!-- <td><?php echo $row['title'] ?></td> -->
-                                                <td><?php echo $row['batch'] ?></td>
-                                                <td><?php echo $row['semester'] ?></td>
-                                                <td><?php echo $row['end_session'] ?></td>
-                                                <td><?php echo $row['catagory'] ?></td>
-                                                <td><?php echo $row['upload_date'] ?></td>
-                                                <td><?php echo $row['sv_name'] ?></td>
-                                                <td style="box-sizing: border-box">
-                                                    <a href="update_student.php?id=<?php echo $row['stu_id'] ?>" style="display: block; box-sizing: border-box; text-decoration: none; padding:5px; background-color: #395B64;; color: #E7F6F2; margin-bottom: 2px;">update</a>
-                                                    <a href="#" style="display: block; box-sizing: border-box; text-decoration: none; padding:5px; background-color: red; color: #E7F6F2;">delete</a>
-                                                </td>
-                                                <!-- <td>
-                                                    <a href="#" style="text-decoration: none; padding:5px; background-color: red; color: #E7F6F2;">delete</a>
-                                                </td> -->
-                                            </tr>
-                                            
-                                        
-
+                                        <tr>
+                                            <td>
+                                                <a href="student_details.php?stuID=<?php echo $row['id'] ?>">
+                                                    <?php echo $row['name'] ?>
+                                                </a>
+                                            </td>
+                                            <td>
+                                                <?php echo $row['id'] ?>
+                                            </td>
+                                            <td>
+                                                <?php echo $row['semester'] ?>
+                                            </td>
+                                            <td>
+                                                <?php echo $row['title'] ?>
+                                            </td>
+                                            <td>
+                                                <?php echo $row['supervisor'] ?>
+                                            </td>
+                                            <td>
+                                                <?php echo $row['credit'] ?>
+                                            </td>
+                                        </tr>
                                         <?php
                                     }
-                                    
                                 }
+                            } else {
+                                if (!empty($_POST['search_option']) && !empty($_POST['value'])) {
+                                    $search_option = $_POST['search_option'];
+                                    $value = htmlspecialchars($_POST['value']);
+
+                                    $sql = "SELECT * FROM students WHERE $search_option LIKE '%$value%' ORDER BY $search_option ASC";
+                                    $query = mysqli_query($conn, $sql);
+                                    if (mysqli_num_rows($query) > 0) {
+                                        while ($row = mysqli_fetch_array($query)) {
+                                            ?>
+                                            <tr>
+                                                <td>
+                                                    <a href="student_details.php?stuID=<?php echo $row['id'] ?>">
+                                                        <?php echo $row['name'] ?>
+                                                    </a>
+                                                </td>
+                                                <td>
+                                                    <?php echo $row['id'] ?>
+                                                </td>
+                                                <td>
+                                                    <?php echo $row['semester'] ?>
+                                                </td>
+                                                <td>
+                                                    <?php echo $row['title'] ?>
+                                                </td>
+                                                <td>
+                                                    <?php echo $row['supervisor'] ?>
+                                                </td>
+                                                <td>
+                                                    <?php echo $row['credit'] ?>
+                                                </td>
+                                            </tr>
+                                            <?php
+                                        }
+                                    }
+
+                                }
+                            }
+
                             ?>
-                    
                         </tbody>
                     </table>
-
                 </div>
             </div>
-            
+
         </div>
     </div>
-    
+
     <?php require_once '../partials/footer.php' ?>
 
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/buttons/2.2.3/js/dataTables.buttons.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
-    <script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.html5.min.js"></script>
-    
-    <script>
-        $(document).ready(function() {
-        $('#example').DataTable( {
-            dom: 'Bfrtip',
-            buttons: [
-                'copyHtml5',
-                'excelHtml5',
-                'csvHtml5',
-                'pdfHtml5'
-            ]
-        } );
-    } );
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.js">
     </script>
+
+    <script src="https://cdn.datatables.net/autofill/2.5.1/js/dataTables.autoFill.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('#myTable').DataTable({
+                order: [
+                    [2, 'asc']
+                ],
+                "pageLength": 25
+            });
+        });
+    </script>
+
+    <script src="../js/nav.js"></script>
+    <script src="../js/navSlider.js"></script>
+
 </body>
+
 </html>

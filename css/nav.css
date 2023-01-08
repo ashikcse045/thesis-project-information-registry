@@ -14,21 +14,17 @@
 .navigration{
     width: 100%;
     min-height: 15px;
-    padding: 0px 10px;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    flex-wrap: wrap;
+    /* padding: 10px 10px; */
     background-color: #395B64;
     color: #E7F6F2;
     /* margin-bottom: 30px; */
 }
 
 .navigration .logo{
-    width: 20%;
-    text-align: right;
-    /* padding: 5px;
-    box-sizing: border-box; */
+    width: 100%;
+    text-align: left;
+    padding: 10px 10px;
+    /* box-sizing: border-box; */
 }
 
 .navigration .logo a{
@@ -36,14 +32,21 @@
 }
 .navigration .logo img{
     width: 80px;
-    /* padding: 5px; */
+    padding: 5px;
+}
+
+.navigration .logo i{
+    float: right;
+    font-size: 35px;
+    padding: 5px;
 }
 
 .navigration .nav{
-    width: 80%;
-    text-align: right;
+    width: 100%;
+    text-align: center;
     /* padding: 5px; */
-    padding-right: 10%;
+    /* padding-right: 10px; */
+    display: none;
 }
 
 .navigration .nav ul{
@@ -51,9 +54,11 @@
 }
 
 .navigration .nav ul li{
-    display: inline-block;
-    padding: 10px 5px;
+    display: block;
+    
     position: relative;
+    border-top: 1px solid #fff;
+    
 }
 
 .navigration .nav ul li a{
@@ -63,6 +68,7 @@
     text-transform: capitalize;
     color: #E7F6F2;
     transition: color 0.4s;
+    display: block;
 }
 
 .navigration .nav ul li a:hover{
@@ -70,34 +76,32 @@
 }
 
 .navigration .nav ul li .nested{
-    min-width: 200px;
-    background-color:#fff;
-    text-align: left;
-    position: absolute;
-    left: 0;
-    top: 130px;
-    /* background-color: #A5C9CA; */
-    border-radius: 9px;
-    box-shadow: 1px 0px 30px #88888842, -1px 1px 30px #88888842;
-    border-top: 5px solid #A5C9CA;
-    /* display: none; */
-    visibility: hidden;
-    opacity: 0.2;
+    width: 80%;
+    background-color: #476a74;
+    text-align: right;
+    margin: 0 auto;
     overflow: hidden;
+    color: rgb(215, 214, 214);
+    /* padding: 0px 20px; */
     transition: 0.25s;
-    transition-timing-function: linear;
 }
 
 .navigration .nav ul li .nested li{
     display: block;
     /* width: 100%; */
-    padding: 0;
+    padding: 0px 10px;
+    border-top: 1px solid rgb(192, 133, 133);
+}
+
+.navigration .nav ul li .nested li:nth-child(1){
+    border: none;
 }
 
 .navigration .nav ul li .nested li a{
     color: #000;
     display: block;
     /* width: 100%; */
+    color: rgb(164, 162, 162);
 }
 
 .navigration .nav ul li .nested li a:hover{
@@ -109,4 +113,115 @@
     left: 0;
     top: 44px;
     opacity: 1;
+}
+
+
+
+
+@media only screen and (min-width: 992px){
+    .navigration{
+        width: 100%;
+        min-height: 15px;
+        padding: 0px 10px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        background-color: #395B64;
+        color: #E7F6F2;
+        /* margin-bottom: 30px; */
+    }
+    
+    .navigration .logo{
+        width: 20%;
+        text-align: right;
+        /* padding: 5px;
+        box-sizing: border-box; */
+    }
+    
+    .navigration .logo a{
+        text-decoration: none;
+    }
+    .navigration .logo img{
+        width: 80px;
+        /* padding: 5px; */
+    }
+
+    .navigration .logo i{
+        display: none;
+    }
+    
+    .navigration .nav{
+        width: 80%;
+        text-align: right;
+        /* padding: 5px; */
+        padding-right: 10%;
+        display: block;
+    }
+    
+    .navigration .nav ul{
+        list-style-type: none;
+    }
+    
+    .navigration .nav ul li{
+        display: inline-block;
+        padding: 10px 5px;
+        position: relative;
+        border: none;
+    }
+    
+    .navigration .nav ul li a{
+        text-decoration: none;
+        padding: 10px 5px;
+        font-size: 20px;
+        text-transform: capitalize;
+        color: #E7F6F2;
+        transition: color 0.4s;
+    }
+    
+    .navigration .nav ul li a:hover{
+        background-color: #426670;
+    }
+    
+    .navigration .nav ul li .nested{
+        min-width: 200px;
+        background-color:#fff;
+        text-align: left;
+        position: absolute;
+        left: 0;
+        top: 130px;
+        /* background-color: #A5C9CA; */
+        border-radius: 9px;
+        box-shadow: 1px 0px 30px #88888842, -1px 1px 30px #88888842;
+        border-top: 5px solid #A5C9CA;
+        /* display: none; */
+        visibility: hidden;
+        opacity: 0.2;
+        overflow: hidden;
+        transition: 0.25s;
+        transition-timing-function: linear;
+    }
+    
+    .navigration .nav ul li .nested li{
+        display: block;
+        /* width: 100%; */
+        padding: 0;
+    }
+    
+    .navigration .nav ul li .nested li a{
+        color: #000;
+        display: block;
+        /* width: 100%; */
+    }
+    
+    .navigration .nav ul li .nested li a:hover{
+        color: #E7F6F2;
+    }
+    
+    .navigration .nav ul li:hover .nested{
+        visibility: visible;
+        left: 0;
+        top: 44px;
+        opacity: 1;
+    }
 }

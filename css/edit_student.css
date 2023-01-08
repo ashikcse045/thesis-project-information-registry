@@ -1,0 +1,119 @@
+.content_box .form_div{
+    width: 100%;
+    padding: 10px;
+}
+
+.content_box .form_div .members .member_about .nested_box{
+    margin-bottom: 15px;
+}
+.content_box .form_div .members .member_about .nested_box label{
+    display: block;
+    font-size: 18px;
+    margin-bottom: 5px;
+    text-transform: capitalize;
+}
+
+.content_box .form_div .members .member_about .nested_box input{
+    width: 100%;
+    padding: 3px 2px;
+    font-size: 22px;;
+}
+.content_box .form_div .members .member_about .nested_box select{
+    width: 100%;
+    font-size: 22px;
+    padding: 3px 2px;
+}
+
+.content_box .form_div .fields input{
+    padding: 10px 15px;
+    font-size: 20px;
+    border: none;
+    background-color: rgb(23, 218, 104);
+    color: rgb(255, 255, 255);
+    text-transform: capitalize;
+    cursor: pointer;
+    font-weight: 600;
+    border-radius: 15px;
+    margin-bottom: 25px;
+    transition: all .4s;
+}
+.content_box .form_div .fields input:hover{
+    background-color: rgb(10, 194, 87);
+}
+
+.content_box .form_div .fields a{
+    text-decoration: none;
+    font-size: 18px;
+    color: rgb(35, 73, 222);
+    padding-left: 15px;
+    transition: all .4s;
+}
+
+.content_box .form_div .fields a:hover{
+    color: red;
+    padding-left: 0px;
+}
+
+.content_box .form_div .fields a i{
+    color: red;
+}
+
+@media only screen and (min-width: 992px){
+    .content_box .form_div{
+        width: 100%;
+        padding: 20px;
+    }
+    
+    .content_box .form_div .members .member_about .nested_box{
+        margin-bottom: 15px;
+    }
+    .content_box .form_div .members .member_about .nested_box label{
+        display: block;
+        font-size: 18px;
+        margin-bottom: 5px;
+        text-transform: capitalize;
+    }
+    
+    .content_box .form_div .members .member_about .nested_box input{
+        width: 50%;
+    }
+    .content_box .form_div .members .member_about .nested_box select{
+        width: 50%;
+        font-size: 22px;
+        padding: 3px 2px;
+    }
+    
+    .content_box .form_div .fields input{
+        padding: 10px 15px;
+        font-size: 20px;
+        border: none;
+        background-color: rgb(23, 218, 104);
+        color: rgb(255, 255, 255);
+        text-transform: capitalize;
+        cursor: pointer;
+        font-weight: 600;
+        border-radius: 15px;
+        margin-bottom: 25px;
+        transition: all .4s;
+    }
+    .content_box .form_div .fields input:hover{
+        background-color: rgb(10, 194, 87);
+    }
+    
+    .content_box .form_div .fields a{
+        text-decoration: none;
+        font-size: 18px;
+        color: rgb(35, 73, 222);
+        padding-left: 15px;
+        transition: all .4s;
+    }
+    
+    .content_box .form_div .fields a:hover{
+        color: red;
+        padding-left: 0px;
+    }
+    
+    .content_box .form_div .fields a i{
+        color: red;
+    }
+}

@@ -1,12 +1,12 @@
 <script>
-    if (window.history.replaceState) {
-        window.history.replaceState(null, null, window.location.href);
-    }
+if (window.history.replaceState) {
+    window.history.replaceState(null, null, window.location.href);
+}
 </script>
 
 <?php
 require_once '../partials/db_connection.php';
-$page = 'add_supervisor';
+$page = 'supervisor_list';
 
 if (isset($_POST['add'])) {
     $valid = true;
@@ -19,7 +19,6 @@ if (isset($_POST['add'])) {
 
     if (!empty($_POST['sName'])) {
         $sName = $_POST['sName'];
-        $sName = strtoupper($sName);
     } else {
         $valid = false;
         $s_er = "* short name is empty";
@@ -74,8 +73,6 @@ if (isset($_POST['add'])) {
             $email = '';
             $pass = '';
             $p = '';
-            $sName = '';
-            $emp_id = '';
             echo "<script>alert('form submitted sucessfully')</script>";
         } else {
             echo "<script>alert('form is not submit')</script>";
@@ -94,7 +91,7 @@ if (isset($_POST['add'])) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>supervisor</title>
+    <title>supervisor list</title>
     <link rel="icon" type="image/x-icon" href="../favicon.ico">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
@@ -103,7 +100,7 @@ if (isset($_POST['add'])) {
     <link rel="stylesheet" href="../css/nav.css">
     <link rel="stylesheet" href="../css/side_nav.css">
     <link rel="stylesheet" href="../css/footer.css">
-    <link rel="stylesheet" href="../css/add_supervisor.css">
+    <link rel="stylesheet" href="../css/supervisor_list.css">
 
 </head>
 
@@ -120,62 +117,47 @@ if (isset($_POST['add'])) {
         <div class="content">
             <div class="content_box">
                 <div class="page_title">
-                    <h1><i class="fa-solid fa-square-caret-right" id="side_arow"></i> add supervisor</h1>
+                    <h1><i class="fa-solid fa-square-caret-right" id="side_arow"></i>supervisor list</h1>
                 </div>
 
-                <div class="form_div">
-                    <form action="" method="POST">
-
-                        <div class="box">
-                            <label for="name">name</label>
-                            <input type="text" name="name" id="name" placeholder="name"
-                                value="<?php echo isset($name) ? $name : '' ?>">
-                            <p>
-                                <?php echo isset($n_er) ? $n_er : '' ?>
-                            </p>
-                        </div>
-
-                        <div class="box">
-                            <label for="sName">short name</label>
-                            <input type="text" name="sName" id="sName" placeholder="short name"
-                                value="<?php echo isset($sName) ? $sName : '' ?>">
-                            <p>
-                                <?php echo isset($s_er) ? $s_er : '' ?>
-                            </p>
-                        </div>
-
-                        <div class="box">
-                            <label for="email">email</label>
-                            <input type="email" name="email" id="email" placeholder="email"
-                                value="<?php echo isset($email) ? $email : '' ?>">
-                            <p>
-                                <?php echo isset($e_er) ? $e_er : '' ?>
-                            </p>
-                        </div>
-
-
-
-                        <div class="box">
-                            <label for="emp_id">employee id</label>
-                            <input type="text" name="emp_id" id="emp_id" placeholder="employee id"
-                                value="<?php echo isset($emp_id) ? $emp_id : '' ?>">
-                            <?php echo isset($emp_er) ? $emp_er : '' ?>
-                        </div>
-
-                        <div class="box">
-                            <label for="pass">password</label>
-                            <input type="text" name="pass" id="pass" placeholder="password"
-                                value="<?php echo isset($p) ? $p : '' ?>">
-                            <?php echo isset($p_er) ? $p_er : '' ?>
-                        </div>
-
-                        <div class="box btn">
-
-                            <input type="submit" name="add" id="add" value="add">
-                        </div>
-
-                    </form>
+                <div class="list_content">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>name</th>
+                                <th>short name</th>
+                                <th>email</th>
+                                <th>employee id</th>
+                                <th>action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            $sql = "select * from supervisor";
+                            $query = mysqli_query($conn, $sql);
+                            if (mysqli_num_rows($query) > 0) {
+                                while ($row = mysqli_fetch_array($query)) {
+                                    ?>
+                            <tr>
+                                <td><?php echo $row['name'] ?></td>
+                                <td>
+                                    <?php echo $row['sName'] ?>
+                                </td>
+                                <td><?php echo $row['email'] ?></td>
+                                <td>
+                                    <?php echo $row['emp_id'] ?>
+                                </td>
+                                <td><a href="edit_supervisor.php?id=<?php echo $row['emp_id'] ?>">update</a> / <a
+                                        href="delete_supervisor.php?id=<?php echo $row['emp_id'] ?>">delete</a></td>
+                            </tr>
+                            <?php
+                                }
+                            }
+                            ?>
+                        </tbody>
+                    </table>
                 </div>
+
 
             </div>
 

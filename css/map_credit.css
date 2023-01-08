@@ -1,0 +1,83 @@
+.container .content .content_box .list_content{
+    width: 100%;
+    padding: 20px;
+    padding: 0px 0px 25px 0px;
+    min-height: 50vh;
+}
+
+.content .list_content .semesters{
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 5px 10px 5px 10px;
+    text-align: center;
+}
+
+.content .list_content .semesters input{
+    display: inline-block;
+    width: fit-content;
+    -webkit-transform: scale(1.7);
+    transform: scale(1.7);
+    margin-right: 10px;
+}
+
+.content .list_content .semesters label{
+    font-size: 23px;
+    cursor: pointer;
+}
+
+.content .list_content .submit_btn{
+    text-align: center;
+}
+
+.content .list_content .submit_btn input{
+    font-size: 22px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    width: 150px;
+    height: 50px;
+    margin-top: 10px;
+    border: none;
+    background: rgb(27, 241, 116);
+    border-radius: 8px;
+    color: #fff;
+    cursor: pointer;
+}
+
+@media only screen and (min-width: 992px){
+    .content .list_content{
+        width: 100%;
+        padding: 20px;
+    }
+    
+    .content .list_content .semesters{
+        width: 100%;
+        margin-bottom: 25px;
+    }
+    
+    .content .list_content .semesters input{
+        display: inline-block;
+        width: fit-content;
+        -webkit-transform: scale(1.7);
+        transform: scale(1.7);
+        margin-right: 10px;
+    }
+    
+    .content .list_content .semesters label{
+        font-size: 23px;
+        cursor: pointer;
+    }
+    
+    .content .list_content .submit_btn input{
+        font-size: 22px;
+        font-weight: 600;
+        letter-spacing: 1px;
+        width: 150px;
+        height: 50px;
+        margin-top: 30px;
+        border: none;
+        background: rgb(27, 241, 116);
+        border-radius: 8px;
+        color: #fff;
+        cursor: pointer;
+    }
+}

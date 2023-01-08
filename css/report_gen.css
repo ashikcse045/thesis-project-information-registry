@@ -1,7 +1,3 @@
-.list_content{
-    padding: 2%;
-}
-
 .filter{
     width: 100%;
     padding: 2%;
@@ -10,22 +6,22 @@
 
 .filter .filter_option{
     width: 100%;
-    display: flex;
+    /* display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: space-between; */
 }
 
 .filter .filter_option select, input{
-    width: 20%;
+    width: 45%;
     font-size: 20px;
     padding: 5px 3px;
+    margin-right: 5px;
 }
 
-.filter .filter_option input{
+.filter .filter_option input[type=submit]{
     cursor: pointer;
 }
-
 
 .list_content .export_btns{
     margin-bottom: 20px;
@@ -55,4 +51,61 @@
 
 .list_content table th{
     text-transform: capitalize;
+}
+
+@media only screen and (min-width: 992px){
+    .filter{
+        width: 100%;
+        padding: 2%;
+    
+    }
+    
+    .filter .filter_option{
+        width: 100%;
+        /* display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-between; */
+    }
+    
+    .filter .filter_option select, input{
+        width: 30%;
+        font-size: 20px;
+        padding: 5px 3px;
+        margin-right: 5px;
+    }
+    
+    .filter .filter_option input[type=submit]{
+        cursor: pointer;
+    }
+    
+    .list_content .export_btns{
+        margin-bottom: 20px;
+    }
+    .list_content .export_btns button{
+        padding: 7px 10px;
+        background-color: #395B64;
+        color: #E7F6F2;
+        font-size: 20px;
+        text-transform: uppercase;
+        cursor: pointer;
+        border-radius: 5px;
+    }
+    
+    .list_content table{
+        width: 100%;
+        border-collapse: collapse;
+    }
+    
+    .list_content table, th, td {
+        border: 1px solid;
+    }
+    
+    .list_content table th, td {
+        padding: 5px 5px;
+    }
+    
+    .list_content table th{
+        text-transform: capitalize;
+    }
 }

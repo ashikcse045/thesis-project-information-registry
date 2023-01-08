@@ -1,0 +1,247 @@
+.container .content .content_box .list_content{
+    width: 100%;
+    padding: 10px;
+}
+
+.container .list_content .student_info{
+    margin-bottom: 25px;
+}
+
+.container .list_content .student_info table{
+    width: 100%;
+    margin-bottom: 30px;
+}
+
+.container .list_content .student_info table tr{
+    font-size: 20px;
+    text-align: left;
+
+}
+
+.container .list_content .student_info table tr th{
+    text-transform: capitalize;
+}
+
+.container .list_content .student_info table tr th, td{
+    padding: 5px 0px;
+}
+
+.container .list_content .student_info table tr th{
+    border: none;
+}
+
+.container .list_content .student_info table tr td{
+    border: none;
+}
+
+.container .list_content .student_info a{
+    text-decoration: none;
+    text-transform: uppercase;
+    padding: 5px 15px;
+    border-radius: 10px;
+    background-color:rgb(27, 241, 116);
+    color: #fff;
+    transition: all .4s ease;
+}
+.container .list_content .student_info a:hover{
+    background-color:rgb(11, 214, 96);
+}
+
+.container .list_content .details{
+    margin-bottom: 25px;
+}
+.container .list_content .details table{
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.container .list_content .details table tr th{
+    text-transform: capitalize;
+    font-size: 15px;
+}
+
+.container .list_content .details table tr td{
+    text-align: center;
+}
+
+.container .list_content .details table tr, th, td{
+    border: 1px solid #000;
+    
+}
+
+.container .list_content .other_team_mates{
+    width: 100%;
+}
+
+.container .list_content .other_team_mates button{
+    padding: 10px 15px;
+    font-size: 20px;
+    border: none;
+    background-color: rgb(27, 241, 116);
+    color: rgb(255, 255, 255);
+    text-transform: capitalize;
+    cursor: pointer;
+    font-weight: 600;
+    border-radius: 15px;
+    margin-bottom: 25px;
+    transition: all .4s;
+}
+
+.container .list_content .other_team_mates button:hover{
+    background-color: rgb(11, 227, 101);
+    color: #fff;
+    
+}
+
+/* .container .list_content .other_team_mates .show_team_mate{
+    height: initial;
+    height: 0;
+    transition: all .5s ease;
+} */
+
+.container .list_content .other_team_mates .show_team_mate .list{
+    margin-bottom: 10px;
+}
+
+.container .list_content .other_team_mates .show_team_mate .list:nth-child(odd){
+    background-color: rgb(237, 236, 236);
+}
+
+.container .list_content .other_team_mates .show_team_mate .list:nth-child(even){
+    background-color: rgb(219, 212, 212);
+}
+
+.container .list_content .other_team_mates .show_team_mate .list a{
+    text-decoration: none;
+    display: block;
+    padding: 3px 3px;
+}
+
+.container .list_content .other_team_mates .show_team_mate .list span{
+    margin-right: 10px;
+}
+
+@media only screen and (min-width: 992px){
+    .container .content .content_box .list_content{
+        width: 100%;
+        padding: 20px;
+    }
+    
+    .container .list_content .student_info{
+        margin-bottom: 25px;
+    }
+    
+    .container .list_content .student_info table{
+        width: 100%;
+        margin-bottom: 30px;
+    }
+    
+    .container .list_content .student_info table tr{
+        font-size: 20px;
+        text-align: left;
+    
+    }
+    
+    .container .list_content .student_info table tr th{
+        text-transform: capitalize;
+    }
+    
+    .container .list_content .student_info table tr th, td{
+        padding: 5px 0px;
+    }
+    
+    .container .list_content .student_info table tr th{
+        border: none;
+    }
+    
+    .container .list_content .student_info table tr td{
+        border: none;
+    }
+    
+    .container .list_content .student_info a{
+        text-decoration: none;
+        text-transform: uppercase;
+        padding: 5px 15px;
+        border-radius: 10px;
+        background-color:rgb(27, 241, 116);
+        color: #fff;
+        transition: all .4s ease;
+    }
+    .container .list_content .student_info a:hover{
+        background-color:rgb(11, 214, 96);
+    }
+    
+    .container .list_content .details{
+        margin-bottom: 25px;
+    }
+    .container .list_content .details table{
+        width: 100%;
+        border-collapse: collapse;
+    }
+    
+    .container .list_content .details table tr th{
+        text-transform: capitalize;
+        font-size: 20px;
+    }
+    
+    .container .list_content .details table tr td{
+        text-align: center;
+    }
+    
+    .container .list_content .details table tr, th, td{
+        border: 1px solid #000;
+        
+    }
+    
+    .container .list_content .other_team_mates{
+        width: 100%;
+    }
+    
+    .container .list_content .other_team_mates button{
+        padding: 10px 15px;
+        font-size: 20px;
+        border: none;
+        background-color: rgb(27, 241, 116);
+        color: rgb(255, 255, 255);
+        text-transform: capitalize;
+        cursor: pointer;
+        font-weight: 600;
+        border-radius: 15px;
+        margin-bottom: 25px;
+        transition: all .4s;
+    }
+    
+    .container .list_content .other_team_mates button:hover{
+        background-color: rgb(11, 227, 101);
+        color: #fff;
+        
+    }
+    
+    /* .container .list_content .other_team_mates .show_team_mate{
+        height: initial;
+        height: 0;
+        transition: all .5s ease;
+    } */
+    
+    .container .list_content .other_team_mates .show_team_mate .list{
+        margin-bottom: 10px;
+    }
+    
+    .container .list_content .other_team_mates .show_team_mate .list:nth-child(odd){
+        background-color: rgb(237, 236, 236);
+    }
+    
+    .container .list_content .other_team_mates .show_team_mate .list:nth-child(even){
+        background-color: rgb(219, 212, 212);
+    }
+    
+    .container .list_content .other_team_mates .show_team_mate .list a{
+        text-decoration: none;
+        display: block;
+        padding: 3px 3px;
+    }
+    
+    .container .list_content .other_team_mates .show_team_mate .list span{
+        margin-right: 10px;
+    }
+}

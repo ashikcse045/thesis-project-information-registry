@@ -1,0 +1,21 @@
+.container{
+    width: 100%;
+    max-width: 100vw;
+    min-height: calc(100vh - 117px);
+    padding: 0;
+    background-color: #2daae0;
+}
+
+.container .photo{
+    width: 100%;
+    text-align: center;
+    overflow: hidden;
+}
+
+.container img{
+    max-width: 100%;
+    margin: 0 auto;
+}
+
+
+

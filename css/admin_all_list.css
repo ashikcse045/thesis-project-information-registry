@@ -1,29 +1,53 @@
-.container{
-    width: 100%;
-    padding: 2% 1%;
-}
-
-.container .side_nav{
-    width: 18%;
-
-}
-
 .container .content{
-    width: 80%;
+    overflow: scroll;
 }
 
-.container .content .content_box .list_content{
-    padding: 20px 5px;
-}
-
-.container .content .content_box table{
-    padding: 5px;
-}
-
-.container .content .content_box table thead, tfoot{
-    text-transform: capitalize;
-}
-
-.dataTables_filter{
+.search{
     width: 100%;
+    padding: 20px 10px;
+}
+
+.dataTables_wrapper .dataTables_filter input{
+    width: 70%;
+    margin-bottom: 20px;
+}
+
+.search .search_option select, input{
+    width: 32%;
+    font-size: 20px;
+    padding: 5px 3px;
+}
+
+.list_content table tr td a{
+    text-decoration: none;
+}
+
+#myTable{
+    width: 100%;
+    /* overflow: hidden; */
+}
+
+@media only screen and (min-width: 992px){
+    .container .content{
+        overflow: initial;
+    }
+    .search{
+        width: 100%;
+        padding: 20px;
+    }
+    
+    .dataTables_wrapper .dataTables_filter input{
+        width: 70%;
+        margin-bottom: 20px;
+    }
+    
+    .search .search_option select, input{
+        width: 20%;
+        font-size: 20px;
+        padding: 5px 3px;
+    }
+    
+    .list_content table tr td a{
+        text-decoration: none;
+    }
 }

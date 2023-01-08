@@ -1,0 +1,64 @@
+.content{
+    width: 100%;
+}
+
+.content .content_box{
+    width: 100%;
+    padding: 15px;
+}
+
+.content .form_div .fields{
+    margin-top: 20px;
+}
+
+.content .form_div .fields .radio{
+    display: block;
+    margin-bottom: 10px;
+    
+}
+
+.content .form_div .fields .radio input{
+    display: inline-block;
+    width: fit-content;
+    -webkit-transform: scale(1.7); /* Chrome, Safari, Opera */
+    transform: scale(1.7);
+    margin-right: 15px;
+
+}
+
+.content .form_div .fields .radio label{
+    font-size: 23px;
+
+}
+
+.content .form_div .fields input#file{
+    display: none;
+}
+.content .form_div .fields input#file + label{
+    display: inline-block;
+    color: #395B64;
+    padding: 8px 10px;
+    border: 2px solid #395B64;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 8px;
+    margin-top: 20px;
+}
+.content .form_div .fields input#file + label i{
+    margin-right: 5px;
+}
+
+.content .form_div .fields #submit{
+    font-size: 22px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    width: 150px;
+    height: 50px;
+    margin-top: 30px;
+    border: none;
+    background: rgb(27, 241, 116);
+    border-radius: 8px;
+    color: #fff;
+    cursor: pointer;
+}
