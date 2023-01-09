@@ -10,18 +10,27 @@ require_once '../partials/db_connection.php';
 if (isset($_GET['stuID'])) {
     $id = $_GET['stuID'];
     $sql = "SELECT * FROM students WHERE id = '$id'";
-    $query = mysqli_query($conn, $sql);
-    $row = mysqli_fetch_array($query);
+    if ($query = mysqli_query($conn, $sql)) {
+        if (mysqli_num_rows($query) === 1) {
+            $row = mysqli_fetch_array($query);
 
-    $name = $row['name'];
-    $title = $row['title'];
-    $semester = $row['semester'];
-    $section = $row['section'];
-    $credit = $row['credit'];
-    $supervisor = $row['supervisor'];
-    // echo $supervisor;
+            $name = $row['name'];
+            $title = $row['title'];
+            $semester = $row['semester'];
+            $section = $row['section'];
+            $credit = $row['credit'];
+            $supervisor = $row['supervisor'];
+            // echo $supervisor;
 
-    $team = $row['teamCode'];
+            $team = $row['teamCode'];
+        } else {
+            header("Location: error.php");
+        }
+    } else {
+        header("Location: error.php");
+    }
+
+
 
 } else {
     header("Location: error.php");

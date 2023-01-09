@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -17,6 +18,7 @@
 
     <link rel="stylesheet" href="../css/error.css">
 </head>
+
 <body>
     <?php require_once '../partials/nav.php' ?>
 
@@ -24,11 +26,14 @@
         <div class="photo">
             <img src="../images/error404.png" alt="error">
         </div>
-        
+
     </div>
 
     <?php require_once '../partials/footer.php' ?>
 
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="../js/nav.js"></script>
+    <!-- <script src="../js/navSlider.js"></script> -->
 </body>
+
 </html>

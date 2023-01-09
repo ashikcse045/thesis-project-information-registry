@@ -1,7 +1,7 @@
 <script>
-    if (window.history.replaceState) {
-        window.history.replaceState(null, null, window.location.href);
-    }
+if (window.history.replaceState) {
+    window.history.replaceState(null, null, window.location.href);
+}
 </script>
 
 <?php
@@ -10,16 +10,26 @@ require_once '../partials/db_connection.php';
 if (isset($_GET['stuID'])) {
     $id = $_GET['stuID'];
     $sql = "SELECT * FROM students WHERE id = '$id'";
-    $query = mysqli_query($conn, $sql);
-    $row2 = mysqli_fetch_array($query);
 
-    $name = $row2['name'];
-    $title = $row2['title'];
-    $semester = $row2['semester'];
-    $section = $row2['section'];
-    // $supervisor = $row2['supervisor'];
+    if ($query = mysqli_query($conn, $sql)) {
+        if (mysqli_num_rows($query) === 1) {
+            $row2 = mysqli_fetch_array($query);
 
-    $team = $row2['teamCode'];
+            $name = $row2['name'];
+            $title = $row2['title'];
+            $semester = $row2['semester'];
+            $section = $row2['section'];
+            // $supervisor = $row2['supervisor'];
+
+            $team = $row2['teamCode'];
+        } else {
+            header("Location: error.php");
+        }
+
+    } else {
+        header("Location: error.php");
+    }
+
 
 } else {
     header("Location: error.php");
@@ -126,18 +136,18 @@ if (isset($_GET['stuID'])) {
                                 if (mysqli_num_rows($query3) > 0) {
                                     while ($row3 = mysqli_fetch_array($query3)) {
                                         ?>
-                                        <tr>
-                                            <td><?php echo $row3['semester'] ?></td>
-                                            <td>
-                                                <?php echo $row3['exam'] ?>
-                                            </td>
-                                            <td><?php echo $row3['marks'] ?></td>
-                                            <td>
-                                                <?php echo $row3['credit'] ?>
-                                            </td>
-                                            <td><?php echo $row3['supervisor'] ?></td>
-                                        </tr>
-                                        <?php
+                                <tr>
+                                    <td><?php echo $row3['semester'] ?></td>
+                                    <td>
+                                        <?php echo $row3['exam'] ?>
+                                    </td>
+                                    <td><?php echo $row3['marks'] ?></td>
+                                    <td>
+                                        <?php echo $row3['credit'] ?>
+                                    </td>
+                                    <td><?php echo $row3['supervisor'] ?></td>
+                                </tr>
+                                <?php
                                     }
                                 }
                                 ?>
@@ -155,18 +165,18 @@ if (isset($_GET['stuID'])) {
                             if (mysqli_num_rows($query4) > 0) {
                                 while ($row4 = mysqli_fetch_array($query4)) {
                                     ?>
-                                    <div class="list">
-                                        <a href="student_details.php?stuID=<?php echo $row4['id']; ?>">
-                                            <span>
-                                                <?php echo $row4['id'] ?>
-                                            </span>
-                                            <span>
-                                                <?php echo $row4['name'] ?>
-                                            </span>
-                                            <!-- <h3><?php echo $row4['title'] ?></h3> -->
-                                        </a>
-                                    </div>
-                                    <?php
+                            <div class="list">
+                                <a href="student_details.php?stuID=<?php echo $row4['id']; ?>">
+                                    <span>
+                                        <?php echo $row4['id'] ?>
+                                    </span>
+                                    <span>
+                                        <?php echo $row4['name'] ?>
+                                    </span>
+                                    <!-- <h3><?php echo $row4['title'] ?></h3> -->
+                                </a>
+                            </div>
+                            <?php
                                 }
                             }
                             ?>
