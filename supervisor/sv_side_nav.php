@@ -33,16 +33,24 @@ if (isset($_SESSION['sv_id'])) {
 
         <div class="dashbord">
             <ul>
-                <li><a href="supervisor_profile.php"
-                        class="<?php echo $page === 'supervisor_profile' ? 'active' : ''; ?>">dashboard</a></li>
-                <li><a href="sv_thesis_project_list.php"
+                <li>
+                    <a href="supervisor_profile.php"
+                        class="<?php echo $page === 'supervisor_profile' ? 'active' : ''; ?>">dashboard</a>
+                </li>
+                <li>
+                    <a href="sv_thesis_project_list.php"
                         class="<?php echo $page === 'sv_thesis_project_list' ? 'active' : ''; ?>">thesis/project
-                        list</a></li>
+                        list</a>
+                </li>
                 <li><a href="my_students.php" class="<?php echo $page === 'my_students' ? 'active' : ''; ?>">my
                         students</a></li>
                 <!-- <li><a href="project_list.php">project list</a></li> -->
                 <li><a href="marks_input.php" class="<?php echo $page === 'marks_input' ? 'active' : ''; ?>">marks
                         input</a></li>
+                <li><a href="marks_input_manually.php" class="<?php echo $page === 'manually' ? 'active' : ''; ?>">marks
+                        input manually</a></li>
+                <li><a href="upload_report.php" class="<?php echo $page === 'uploadReport' ? 'active' : ''; ?>">
+                        upload report</a></li>
                 <li><a href="#" class="<?php echo $page === 'account' ? 'active' : ''; ?>">account setting</a></li>
                 <li><a href="sv_logout.php">log out</a></li>
 

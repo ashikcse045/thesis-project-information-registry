@@ -1,0 +1,136 @@
+
+.content .form_div{
+    width: 100%;
+    /* border-radius: 15px; */
+    padding: 25px;
+    /* border: 2px solid #395B64 */
+    /* background: #030809a1; */
+    /* box-shadow: 1px 1px 10px #395B64; */
+}
+
+.content .form_div .fields{
+    display: block;
+    margin-bottom: 20px;
+    
+}
+
+.content .form_div .fields select{
+    display: inline-block;
+    font-size: 25px;
+    width: 100%;
+    border: 2px solid #395B64;
+    background-color: transparent;
+    outline: none;
+    box-shadow: none;
+    border-radius: 8px;
+    padding: 5px 3px;
+    color: #2C3333;
+    margin-bottom: 20px;
+    margin-right: 0;
+}
+
+.content .form_div .error_msg{
+    color: red;
+    font-weight: bold;
+}
+
+
+.content .form_div .fields input#file{
+    display: none;
+}
+.content .form_div .fields input#file + label{
+    display: inline-block;
+    color: #395B64;
+    padding: 8px 10px;
+    border: 2px solid #395B64;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 8px;
+    margin-top: 20px;
+}
+.content .form_div .fields input#file + label i{
+    margin-right: 5px;
+}
+
+
+
+.content .form_div .fields #submit{
+    width: 100%;
+    height: 50px;
+    margin-top: 30px;
+    border: none;
+    background: rgb(27, 241, 116);
+    border-radius: 10px;
+    color: #fff;
+    font-size: 20px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+@media only screen and (min-width: 992px){
+    .content .form_div{
+        width: 100%;
+        /* border-radius: 15px; */
+        padding: 25px;
+        /* border: 2px solid #395B64 */
+        /* background: #030809a1; */
+        /* box-shadow: 1px 1px 10px #395B64; */
+    }
+
+    .content .form_div .fields{
+        display: block;
+        margin-bottom: 20px;
+        
+    }
+
+    .content .form_div .fields select{
+        display: inline-block;
+        font-size: 25px;
+        width: 30%;
+        border: 2px solid #395B64;
+        background-color: transparent;
+        outline: none;
+        box-shadow: none;
+        border-radius: 8px;
+        padding: 5px 3px;
+        color: #2C3333;
+        margin-right: 20px;
+        margin-bottom: 0;
+    }
+
+    .content .form_div .error_msg{
+        color: red;
+        font-weight: bold;
+    }
+
+
+    .content .form_div .fields input#file{
+        display: none;
+    }
+    .content .form_div .fields input#file + label{
+        display: inline-block;
+        color: #395B64;
+        padding: 8px 10px;
+        border: 2px solid #395B64;
+        font-size: 20px;
+        font-weight: bold;
+        cursor: pointer;
+        border-radius: 8px;
+        margin-top: 20px;
+    }
+    .content .form_div .fields input#file + label i{
+        margin-right: 5px;
+    }
+
+
+
+    .content .form_div .fields #submit{
+        width: 150px;
+        height: 50px;
+        margin-top: 30px;
+        border: none;
+        background: rgb(27, 241, 116);
+        cursor: pointer;
+    }
+}

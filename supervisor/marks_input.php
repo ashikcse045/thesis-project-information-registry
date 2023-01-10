@@ -142,7 +142,7 @@ if (isset($_POST['submit'])) {
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="../css/nav.css">
     <link rel="stylesheet" href="../css/side_nav.css">
-    <link rel="stylesheet" href="../css/register.css">
+    <link rel="stylesheet" href="../css/marks_input.css">
     <link rel="stylesheet" href="../css/footer.css">
 
 </head>

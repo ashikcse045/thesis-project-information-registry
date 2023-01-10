@@ -1,7 +1,7 @@
 <script>
-if (window.history.replaceState) {
-    window.history.replaceState(null, null, window.location.href);
-}
+    if (window.history.replaceState) {
+        window.history.replaceState(null, null, window.location.href);
+    }
 </script>
 
 <?php
@@ -183,15 +183,15 @@ if (isset($_POST['submit'])) {
                                                 $svName = $row2['name'];
                                                 $sName = $row2['sName'];
                                                 ?>
-                                        <option <?php
+                                                <option <?php
                                                 echo 'value="' . $sName . '"';
                                                 if ($sName === $supervisor) {
                                                     echo "selected";
                                                 }
                                                 ?>>
-                                            <?php echo $svName . ' (' . $sName . ')'; ?>
-                                        </option>
-                                        <?php
+                                                    <?php echo $svName . ' (' . $sName . ')'; ?>
+                                                </option>
+                                                <?php
                                             }
                                         }
                                         ?>

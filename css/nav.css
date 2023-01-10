@@ -206,6 +206,7 @@
         display: block;
         /* width: 100%; */
         padding: 0;
+        border: none;
     }
     
     .navigration .nav ul li .nested li a{
@@ -221,7 +222,7 @@
     .navigration .nav ul li:hover .nested{
         visibility: visible;
         left: 0;
-        top: 44px;
+        top: 60px;
         opacity: 1;
     }
 }

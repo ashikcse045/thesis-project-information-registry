@@ -18,6 +18,7 @@
     -webkit-transform: scale(1.7);
     transform: scale(1.7);
     margin-right: 10px;
+    margin-bottom: 10px;
 }
 
 .content .list_content .semesters label{
@@ -44,14 +45,16 @@
 }
 
 @media only screen and (min-width: 992px){
-    .content .list_content{
+    .container .content .content_box .list_content{
         width: 100%;
-        padding: 20px;
+        padding: 20px 20px;
     }
     
     .content .list_content .semesters{
         width: 100%;
         margin-bottom: 25px;
+        text-align: left;
+
     }
     
     .content .list_content .semesters input{
@@ -60,6 +63,7 @@
         -webkit-transform: scale(1.7);
         transform: scale(1.7);
         margin-right: 10px;
+       
     }
     
     .content .list_content .semesters label{

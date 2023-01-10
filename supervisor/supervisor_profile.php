@@ -1,7 +1,7 @@
 <script>
-    if (window.history.replaceState) {
-        window.history.replaceState(null, null, window.location.href);
-    }
+if (window.history.replaceState) {
+    window.history.replaceState(null, null, window.location.href);
+}
 </script>
 
 <?php
@@ -55,9 +55,14 @@ $page = 'supervisor_profile';
                                 <h2>project</h2>
                             </div>
                         </a> -->
-                    <a href="register.php">
+                    <a href="my_students.php">
                         <div class="box">
-                            <h2>register</h2>
+                            <h2>my students</h2>
+                        </div>
+                    </a>
+                    <a href="marks_input.php">
+                        <div class="box">
+                            <h2>marks input</h2>
                         </div>
                     </a>
                 </div>
