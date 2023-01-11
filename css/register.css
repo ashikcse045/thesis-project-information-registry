@@ -26,6 +26,7 @@
 .content .form_div .bdr{
     color:#395B64;
     font-weight: bold;
+    text-transform: capitalize;
 }
 
 

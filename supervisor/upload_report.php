@@ -1,7 +1,7 @@
 <script>
-if (window.history.replaceState) {
-    window.history.replaceState(null, null, window.location.href);
-}
+    if (window.history.replaceState) {
+        window.history.replaceState(null, null, window.location.href);
+    }
 </script>
 
 <?php
@@ -214,7 +214,7 @@ if (isset($_POST['submit'])) {
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="../js/nav.js"></script>
     <script src="../js/navSlider.js"></script>
-    <script src="../js/register.js"></script>
+    <script src="../js/report_upload.js"></script>
 
 </body>
 

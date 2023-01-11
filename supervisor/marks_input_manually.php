@@ -9,399 +9,174 @@ require_once '../partials/db_connection.php';
 $page = 'manually';
 
 $today = date("Y-m-d");
-$sv_uid = $_SESSION['sv_id'];
-// $sql = "select id from sv_table where email='$uid'";
-// $query = mysqli_query($conn, $sql);
-// $row = mysqli_fetch_array($query);
-$sv_ref = $sv_uid;
+if (isset($_SESSION['sv_id'])) {
+    $sv_uid = $_SESSION['sv_id'];
+    $sql = "select name, sName from supervisor where email='$sv_uid'";
+    $query = mysqli_query($conn, $sql);
+
+    while ($row = mysqli_fetch_array($query)) {
+        $sv_name = $row['name'];
+        $sv_short_name = $row['sName'];
+    }
+
+
+
+} else {
+    header("Location: supervisor_login.php");
+}
 
 if (isset($_POST['submit'])) {
-    $one_valid = true;
-    $two_valid = true;
-    $all_valid = true;
-    $team_id = "cse_" . rand(10000, 99999);
-
-    // $_POST = array();
-    // title check 
-    if (!empty($_POST['title'])) {
-        $title = htmlspecialchars($_POST['title']);
-
+    $valid = true;
+    $valid1 = true;
+    $valid2 = true;
+    $valid3 = true;
+    // $file_valid = true;
+    if (!empty($_POST['semester'])) {
+        $semester = htmlspecialchars($_POST['semester']);
+        // echo $semester;
     } else {
-        $one_valid = false;
-        $title_error = "* Please fill title field";
+        $valid = false;
+        $valid1 = false;
+        $valid2 = false;
+        $valid3 = false;
+        $sem_error = " * select semester first";
     }
 
-    // catagory check 
-    if (!empty($_POST['catagory'])) {
-        $catagory = $_POST['catagory'];
+    if (!empty($_POST['e_year'])) {
+        $exam_year = htmlspecialchars($_POST['e_year']);
     } else {
-        $one_valid = false;
-        $cat_error = "* please fill catagory field";
+        $valid = false;
+        $valid1 = false;
+        $valid2 = false;
+        $valid3 = false;
+        $exam_error = " * select exam year first";
     }
 
-    // 1st member info check
-    // NAME
-    if (!empty($_POST['1_name'])) {
-        $m1_name = $_POST['1_name'];
-
-        // ID
-        if (!empty($_POST['1_id'])) {
-            $m1_id = $_POST['1_id'];
-
-            // BATCH
-            if (!empty($_POST['1_batch'])) {
-                $m1_batch = $_POST['1_batch'];
-
-                // SESMESTER
-                if (!empty($_POST['1_semester'])) {
-                    $m1_semester = $_POST['1_semester'];
-
-                    // CREDIT
-                    if (!empty($_POST['1_credit'])) {
-                        $m1_credit = $_POST['1_credit'];
-                    } else {
-                        $one_valid = false;
-                        $m1_error = "* Please fill 1st member credit field";
-                    }
-                } else {
-                    $one_valid = false;
-                    $m1_error = "* Please fill 1st member semester field";
-                }
-            } else {
-                $one_valid = false;
-                $m1_error = "* Please fill 1st member batch field";
-            }
-        } else {
-            $one_valid = false;
-            $m1_error = "* Please fill 1st member id field";
-        }
+    if (!empty($_POST['e_session'])) {
+        $exam_session = htmlspecialchars($_POST['e_session']);
     } else {
-        $one_valid = false;
-        $m1_error = "* Please fill 1st member name field";
+        $valid = false;
+        $valid1 = false;
+        $valid2 = false;
+        $valid3 = false;
+        $exam_error = " * select exam session first";
     }
 
-    // 2nd member info check
-    // NAME
-    if (!empty($_POST['2_name'])) {
-        $m2_name = $_POST['2_name'];
 
-        // ID
-        if (!empty($_POST['2_id'])) {
-            $m2_id = $_POST['2_id'];
+    // member 1 validation
 
-            // BATCH
-            if (!empty($_POST['2_batch'])) {
-                $m2_batch = $_POST['2_batch'];
-
-                // SESMESTER
-                if (!empty($_POST['2_semester'])) {
-                    $m2_semester = $_POST['2_semester'];
-
-                    // CREDIT
-                    if (!empty($_POST['2_credit'])) {
-                        $m2_credit = $_POST['2_credit'];
-                    } else {
-                        $two_valid = false;
-                        $m2_error = "* Please fill 2nd member credit field";
-                    }
-                } else {
-                    $two_valid = false;
-                    $m2_error = "* Please fill 2nd member semester field";
-                }
-            } else {
-                $two_valid = false;
-                $m2_error = "* Please fill 2nd member batch field";
-            }
-        } else {
-            $two_valid = false;
-            $m2_error = "* Please fill 2nd member id field";
-        }
+    if (!empty($_POST['m1_id'])) {
+        $m1_id = htmlspecialchars($_POST['m1_id']);
     } else {
-        $two_valid = false;
-        $m2_error = "* Please fill 2nd member name field";
+        $valid = false;
+        $valid1 = false;
+        $m1_error = " * enter 1st member details first";
     }
 
-    // 3rd member info check
-    // NAME
-    if (!empty($_POST['3_name'])) {
-        $m3_name = $_POST['3_name'];
-
-        // ID
-        if (!empty($_POST['3_id'])) {
-            $m3_id = $_POST['3_id'];
-
-            // BATCH
-            if (!empty($_POST['3_batch'])) {
-                $m3_batch = $_POST['3_batch'];
-
-                // SESMESTER
-                if (!empty($_POST['3_semester'])) {
-                    $m3_semester = $_POST['3_semester'];
-
-                    // CREDIT
-                    if (!empty($_POST['3_credit'])) {
-                        $m3_credit = $_POST['3_credit'];
-                    } else {
-                        $all_valid = false;
-                        $m3_error = "* Please fill 3rd member credit field";
-                    }
-                } else {
-                    $all_valid = false;
-                    $m3_error = "* Please fill 3rd member semester field";
-                }
-            } else {
-                $all_valid = false;
-                $m3_error = "* Please fill 3rd member batch field";
-            }
-        } else {
-            $all_valid = false;
-            $m3_error = "* Please fill 3rd member id field";
-        }
+    if (!empty($_POST['m1_marks'])) {
+        $m1_marks = htmlspecialchars($_POST['m1_marks']);
     } else {
-        $all_valid = false;
-        $m3_error = "* Please fill 3rd member name field";
+        $valid = false;
+        $valid1 = false;
+        $m1_error = " * enter 1st member details first";
     }
 
-    // session check 
-    // STARTING SESSION
-    // session name
-    if (!empty($_POST['s_sName'])) {
-        $s_sName = $_POST['s_sName'];
-
-        // session year
-        if (!empty($_POST['s_sYear'])) {
-            $s_sYear = $_POST['s_sYear'];
-
-            $st_session = $s_sName . "-" . $s_sYear;
-        } else {
-            $one_valid = false;
-            $st_sess_error = "* please fill starting session year";
-        }
+    if (!empty($_POST['m1_credit'])) {
+        $m1_credit = htmlspecialchars($_POST['m1_credit']);
     } else {
-        $one_valid = false;
-        $st_sess_error = "* please fill starting session name";
+        $valid = false;
+        $valid1 = false;
+        $m1_error = " * enter 1st member details first";
     }
 
-    // ENDING SESSION
-    // session name
-    if (!empty($_POST['e_sName'])) {
-        $e_sName = $_POST['e_sName'];
+    // member 2 validation
 
-        // session year
-        if (!empty($_POST['e_sYear'])) {
-            $e_sYear = $_POST['e_sYear'];
-            $end_session = $e_sName . "-" . $e_sYear;
-        } else {
-            $one_valid = false;
-            $end_sess_error = "* please fill ending session year";
-        }
+    if (!empty($_POST['m2_id'])) {
+        $m2_id = htmlspecialchars($_POST['m2_id']);
     } else {
-        $one_valid = false;
-        $end_sess_error = "* please fill ending session name";
+        $valid2 = false;
+        $m2_error = " * enter 2nd member details first";
     }
 
-    // FILE VALIDATION
-
-    // >>** SUBMIT THE FORM **<<
-
-    if ($all_valid && $two_valid && $one_valid) {
-        if (!empty($_FILES['file']['name'])) {
-            $upload_dir = "../uploads/";
-            $file_name = basename($_FILES['file']['name']);
-            $temp_name = $_FILES['file']['tmp_name'];
-            $file_type = $_FILES['file']['type'];
-            $file_size = $_FILES['file']['size'];
-            $file_size = $file_size / (1024 * 1024);
-            $ext = pathinfo($file_name, PATHINFO_EXTENSION);
-
-            $replace_name = $team_id . "." . $ext;
-
-            $target_dir = $upload_dir . $replace_name;
-            // echo $replace_name;
-
-            if ($ext === 'pdf') {
-                if ($file_size < 5) {
-                    //code
-                    $sql = "insert into thesis_project_info (stu_id, stu_name, batch, semester, credit, title, catagory, st_session, end_session, sv_ref, upload_date, report, team_id) 
-                                values 
-                                ('$m1_id', '$m1_name', '$m1_batch', '$m1_semester', '$m1_credit', '$title', '$catagory', '$st_session', '$end_session', '$sv_ref', '$today', '$replace_name', '$team_id'),
-
-                                ('$m2_id', '$m2_name', '$m2_batch', '$m2_semester', '$m2_credit', '$title', '$catagory', '$st_session', '$end_session', '$sv_ref', '$today', '$replace_name', '$team_id'),
-
-                                ('$m3_id', '$m3_name', '$m3_batch', '$m3_semester', '$m3_credit', '$title', '$catagory', '$st_session', '$end_session', '$sv_ref', '$today', '$replace_name', '$team_id')";
-
-                    if (mysqli_query($conn, $sql) && move_uploaded_file($temp_name, $target_dir)) {
-                        $m1_id = '';
-                        $m1_name = '';
-                        $m1_batch = '';
-                        $m1_semester = '';
-                        $m1_credit = '';
-                        $m2_id = '';
-                        $m2_name = '';
-                        $m2_batch = '';
-                        $m2_semester = '';
-                        $m2_credit = '';
-                        $m3_id = '';
-                        $m3_name = '';
-                        $m3_batch = '';
-                        $m3_semester = '';
-                        $m3_credit = '';
-                        $title = '';
-                        $catagory = '';
-                        $st_session = '';
-                        $end_session = '';
-                        $s_sName = '';
-                        $s_sYear = '';
-                        $e_sName = '';
-                        $e_sYear = '';
-                        $sv_ref = '';
-                        $today = '';
-                        $replace_name = '';
-                        echo "<script>alert('form submited sucessfully')</script>";
-                    } else {
-                        echo "<script>alert('error! not submit')</script>";
-                    }
-                } else {
-                    $file_error = "* file must be less then 5 Mb";
-                    echo "<script>alert('file must be less then 5 Mb')</script>";
-                }
-            } else {
-                $file_error = "* the file was not PDF";
-                echo "<script>alert('file was not PDF')</script>";
-            }
-
-
-        } else {
-            $file_error = "* please select a PDF file";
-            echo "<script>alert('select a PDF file')</script>";
-        }
-
-    } else if ($two_valid && !isset($m3_name) && $one_valid) {
-        if (!empty($_FILES['file']['name'])) {
-            $upload_dir = "../uploads/";
-            $file_name = basename($_FILES['file']['name']);
-            $temp_name = $_FILES['file']['tmp_name'];
-            $file_type = $_FILES['file']['type'];
-            $file_size = $_FILES['file']['size'];
-            $file_size = $file_size / (1024 * 1024);
-
-            $ext = pathinfo($file_name, PATHINFO_EXTENSION);
-            $replace_name = $team_id . "." . $ext;
-
-            $target_dir = $upload_dir . $replace_name;
-            // echo $replace_name;
-
-            if ($ext === 'pdf') {
-                if ($file_size < 5) {
-                    //code
-                    $sql = "insert into thesis_project_info (stu_id, stu_name, batch, semester, credit, title, catagory, st_session, end_session, sv_ref, upload_date, report, team_id) 
-                                values 
-                                ('$m1_id', '$m1_name', '$m1_batch', '$m1_semester', '$m1_credit', '$title', '$catagory', '$st_session', '$end_session', '$sv_ref', '$today', '$replace_name', '$team_id'),
-
-                                ('$m2_id', '$m2_name', '$m2_batch', '$m2_semester', '$m2_credit', '$title', '$catagory', '$st_session', '$end_session', '$sv_ref', '$today', '$replace_name', '$team_id')";
-
-                    if (mysqli_query($conn, $sql) && move_uploaded_file($temp_name, $target_dir)) {
-                        $m1_id = '';
-                        $m1_name = '';
-                        $m1_batch = '';
-                        $m1_semester = '';
-                        $m1_credit = '';
-                        $m2_id = '';
-                        $m2_name = '';
-                        $m2_batch = '';
-                        $m2_semester = '';
-                        $m2_credit = '';
-                        $title = '';
-                        $catagory = '';
-                        $st_session = '';
-                        $end_session = '';
-                        $s_sName = '';
-                        $s_sYear = '';
-                        $e_sName = '';
-                        $e_sYear = '';
-                        $sv_ref = '';
-                        $today = '';
-                        $replace_name = '';
-                        echo "<script>alert('form submited sucessfully')</script>";
-                    } else {
-                        echo "<script>alert('error! not submit')</script>";
-                    }
-                } else {
-                    $file_error = "* file must be less then 5 Mb";
-                    echo "<script>alert('file must be less then 5 Mb')</script>";
-                }
-            } else {
-                $file_error = "* the file was not PDF";
-                echo "<script>alert('file was not PDF')</script>";
-            }
-
-
-        } else {
-            $file_error = "* please select a PDF file";
-            echo "<script>alert('select a PDF file')</script>";
-        }
-
-    } else if ($one_valid && !isset($m2_name) && !isset($m3_name)) {
-        if (!empty($_FILES['file']['name'])) {
-            $upload_dir = "../uploads/";
-            $file_name = basename($_FILES['file']['name']);
-            $temp_name = $_FILES['file']['tmp_name'];
-            $file_type = $_FILES['file']['type'];
-            $file_size = $_FILES['file']['size'];
-            $file_size = $file_size / (1024 * 1024);
-            $ext = pathinfo($file_name, PATHINFO_EXTENSION);
-
-            $replace_name = $team_id . "." . $ext;
-            $target_dir = $upload_dir . $replace_name;
-            // echo $replace_name;
-
-            if ($ext === 'pdf') {
-                if ($file_size < 5) {
-                    //code
-                    $sql = "insert into thesis_project_info (stu_id, stu_name, batch, semester, credit, title, catagory, st_session, end_session, sv_ref, upload_date, report, team_id) 
-                                values 
-                                ('$m1_id', '$m1_name', '$m1_batch', '$m1_semester', '$m1_credit', '$title', '$catagory', '$st_session', '$end_session', '$sv_ref', '$today', '$replace_name', '$team_id')";
-
-                    if (mysqli_query($conn, $sql) && move_uploaded_file($temp_name, $target_dir)) {
-                        $m1_id = '';
-                        $m1_name = '';
-                        $m1_batch = '';
-                        $m1_semester = '';
-                        $m1_credit = '';
-                        $title = '';
-                        $catagory = '';
-                        $st_session = '';
-                        $end_session = '';
-                        $s_sName = '';
-                        $s_sYear = '';
-                        $e_sName = '';
-                        $e_sYear = '';
-                        $sv_ref = '';
-                        $today = '';
-                        $replace_name = '';
-                        echo "<script>alert('form submited sucessfully')</script>";
-                    } else {
-                        echo "<script>alert('error! not submit')</script>";
-                    }
-                } else {
-                    $file_error = "* file must be less then 5 Mb";
-                    echo "<script>alert('file must be less then 5 Mb')</script>";
-                }
-            } else {
-                $file_error = "* the file was not PDF";
-                echo "<script>alert('file was not PDF')</script>";
-            }
-
-
-        } else {
-            $file_error = "* please select a PDF file";
-            echo "<script>alert('select a PDF file')</script>";
-        }
-
+    if (!empty($_POST['m2_marks'])) {
+        $m2_marks = htmlspecialchars($_POST['m2_marks']);
     } else {
-        // echo "something wrong!";
-        echo "<script>alert('form not valid')</script>";
+        $valid2 = false;
+        $m2_error = " * enter 2nd member details first";
     }
+
+    if (!empty($_POST['m2_credit'])) {
+        $m2_credit = htmlspecialchars($_POST['m2_credit']);
+    } else {
+        $valid2 = false;
+        $m2_error = " * enter 2nd member details first";
+    }
+
+    // member 3 validation
+
+    if (!empty($_POST['m3_id'])) {
+        $m3_id = htmlspecialchars($_POST['m3_id']);
+    } else {
+        $valid3 = false;
+        $m3_error = " * enter 3rd member details first";
+    }
+
+    if (!empty($_POST['m3_marks'])) {
+        $m3_marks = htmlspecialchars($_POST['m3_marks']);
+    } else {
+        $valid3 = false;
+        $m3_error = " * enter 3rd member details first";
+    }
+
+    if (!empty($_POST['m3_credit'])) {
+        $m3_credit = htmlspecialchars($_POST['m3_credit']);
+    } else {
+        $valid3 = false;
+        $m3_error = " * enter 3rd member details first";
+    }
+
+
+    if ($valid === true && $valid1 === true && $valid2 === true && $valid3 === true) {
+        //insert 3 member details without file
+        $exam = $exam_session . " - " . $exam_year;
+        $sql = "INSERT INTO result (id, semester, exam, marks, credit, supervisor) 
+                VALUES
+                ('$m1_id', '$semester', '$exam', '$m1_marks', '$m1_credit', '$sv_short_name'),
+                ('$m2_id', '$semester', '$exam', '$m2_marks', '$m2_credit', '$sv_short_name'),
+                ('$m3_id', '$semester', '$exam', '$m3_marks', '$m3_credit', '$sv_short_name')";
+
+        if (mysqli_query($conn, $sql)) {
+            echo "<script>alert('data inserted sucessfully')</script>";
+        }
+
+    }
+
+    if ($valid === true && $valid1 === true && $valid2 === true && $valid3 === false) {
+        //insert 2 member details without file
+        $exam = $exam_session . " - " . $exam_year;
+        $sql = "INSERT INTO result (id, semester, exam, marks, credit, supervisor) 
+                VALUES
+                ('$m1_id', '$semester', '$exam', '$m1_marks', '$m1_credit', '$sv_short_name'),
+                ('$m2_id', '$semester', '$exam', '$m2_marks', '$m2_credit', '$sv_short_name')";
+
+        if (mysqli_query($conn, $sql)) {
+            echo "<script>alert('data inserted sucessfully')</script>";
+        }
+    }
+
+    if ($valid === true && $valid1 === true && $valid2 === false && $valid3 === false) {
+        //insert 1 member details without file
+        $exam = $exam_session . " - " . $exam_year;
+        $sql = "INSERT INTO result (id, semester, exam, marks, credit, supervisor) 
+            VALUES
+            ('$m1_id', '$semester', '$$exam', '$m1_marks', '$m1_credit', '$sv_short_name')";
+
+        if (mysqli_query($conn, $sql)) {
+            echo "<script>alert('data inserted sucessfully')</script>";
+        }
+    }
+
+
 
 }
 ?>
@@ -449,182 +224,49 @@ if (isset($_POST['submit'])) {
                 <div class="form_div">
                     <form action="" method="POST" enctype="multipart/form-data">
 
-                        <div class="fields">
-                            <label for="title" class="bdr">Thesis/Project title</label>
-                            <input type="text" name="title" id="title" placeholder="Thesis/Project title"
-                                value="<?php echo isset($title) ? $title : '' ?>">
-                            <p class="error_msg">
-                                <?php echo isset($title_error) ? $title_error : '' ?>
-                            </p>
-                        </div>
-
-                        <!-- <div class="fields radio">
-                            <label class="bdr">Catagory</label>
-                            <br>
-                            <input type="radio" name="catagory" id="thesis" value="thesis"
-                                <?php if (isset($catagory)) {
-                                    if ($catagory == 'thesis') {
-                                        echo 'checked';
-                                    }
+                        <div class="fields dates">
+                            <label for="semester" class="bdr">semester</label>
+                            <select name="semester" id="semester">
+                                <option value="0" <?php if (isset($semester)) {
+                                    echo $semester == 0 ? 'selected' : '';
                                 } ?>>
-                            <label for="thesis">Thesis</label>
-                            <br>
-                            <input type="radio" name="catagory" id="project" value="project"
-                                <?php if (isset($catagory)) {
-                                    if ($catagory == 'project') {
-                                        echo 'checked';
-                                    }
+                                    select semester
+                                </option>
+                                <option value="10" <?php if (isset($semester)) {
+                                    echo $semester == 10 ? 'selected' : '';
                                 } ?>>
-                            <label for="project">Project</label>
+                                    10 semester
+                                </option>
+                                <option value="11" <?php if (isset($semester)) {
+                                    echo $semester == 11 ? 'selected' : '';
+                                } ?>>
+                                    11 semester
+                                </option>
+                                <option value="12" <?php if (isset($semester)) {
+                                    echo $semester == 12 ? 'selected' : '';
+                                } ?>>
+                                    12 semester
+                                </option>
 
-                            <p class="error_msg"><?php echo isset($cat_error) ? $cat_error : '' ?></p>
-                        </div> -->
-
-                        <div class="members">
-                            <label for="" class="bdr">1st member</label>
-                            <div class="member_about">
-                                <div class="nested_box">
-                                    <label for="m1_name">name</label>
-                                    <input type="text" name="1_name" id="m1_name" placeholder="name"
-                                        value="<?php echo isset($m1_name) ? $m1_name : '' ?>">
-                                </div>
-                                <div class="nested_box">
-                                    <label for="m1_id">id</label>
-                                    <input type="text" name="1_id" id="m1_id" placeholder="id"
-                                        value="<?php echo isset($m1_id) ? $m1_id : '' ?>">
-                                </div>
-                                <!-- <div class="nested_box">
-                                    <label for="m1_batch">batch</label>
-                                    <input type="text" name="1_batch" id="m1_batch" placeholder="batch"
-                                        value="<?php echo isset($m1_batch) ? $m1_batch : '' ?>">
-                                </div> -->
-                                <div class="nested_box">
-                                    <label for="m1_sem">semester</label>
-                                    <input type="text" name="1_semester" id="m1_sem" placeholder="semester"
-                                        value="<?php echo isset($m1_semester) ? $m1_semester : '' ?>">
-                                </div>
-                                <div class="nested_box">
-                                    <label for="m1_credit">credit</label>
-                                    <input type="text" name="1_credit" id="m1_credit" placeholder="credit"
-                                        value="<?php echo isset($m1_credit) ? $m1_credit : '' ?>">
-                                </div>
-
-                            </div>
-                            <p class="error_msg">
-                                <?php echo isset($m1_error) ? $m1_error : '' ?>
+                            </select>
+                            <p class=" error_msg">
+                                <?php echo isset($sem_error) ? $sem_error : '' ?>
                             </p>
                         </div>
-
-                        <div class="members">
-                            <label for="" class="bdr">2nd member</label>
-                            <div class="member_about">
-                                <div class="nested_box">
-                                    <label for="m2_name">name</label>
-                                    <input type="text" name="2_name" id="m2_name" placeholder="name"
-                                        value="<?php echo isset($m2_name) ? $m2_name : '' ?>">
-                                </div>
-                                <div class="nested_box">
-                                    <label for="m2_id">id</label>
-                                    <input type="text" name="2_id" id="m2_id" placeholder="id"
-                                        value="<?php echo isset($m2_id) ? $m2_id : '' ?>">
-                                </div>
-                                <!-- <div class="nested_box">
-                                    <label for="m2_batch">batch</label>
-                                    <input type="text" name="2_batch" id="m2_batch" placeholder="batch"
-                                        value="<?php echo isset($m2_batch) ? $m2_batch : '' ?>">
-                                </div> -->
-                                <div class="nested_box">
-                                    <label for="m2_sem">semester</label>
-                                    <input type="text" name="2_semester" id="m2_sem" placeholder="semester"
-                                        value="<?php echo isset($m2_semester) ? $m2_semester : '' ?>">
-                                </div>
-                                <div class="nested_box">
-                                    <label for="m2_credit">credit</label>
-                                    <input type="text" name="2_credit" id="m2_credit" placeholder="credit"
-                                        value="<?php echo isset($m2_credit) ? $m2_credit : '' ?>">
-                                </div>
-                            </div>
-                            <p class="error_msg">
-                                <?php if (isset($m1_name) && isset($m2_name) && isset($m2_error)) {
-                                    echo $m2_error;
-                                } ?>
-                            </p>
-                        </div>
-
-                        <div class="members">
-                            <label for="" class="bdr">3rd member</label>
-                            <div class="member_about">
-                                <div class="nested_box">
-                                    <label for="m3_name">name</label>
-                                    <input type="text" name="3_name" id="m3_name" placeholder="name"
-                                        value="<?php echo isset($m3_name) ? $m3_name : '' ?>">
-                                </div>
-                                <div class="nested_box">
-                                    <label for="m3_id">id</label>
-                                    <input type="text" name="3_id" id="m3_id" placeholder="id"
-                                        value="<?php echo isset($m3_id) ? $m3_id : '' ?>">
-                                </div>
-                                <!-- <div class="nested_box">
-                                    <label for="m3_batch">batch</label>
-                                    <input type="text" name="3_batch" id="m3_batch" placeholder="batch"
-                                        value="<?php echo isset($m3_batch) ? $m3_batch : '' ?>">
-                                </div> -->
-                                <div class="nested_box">
-                                    <label for="m3_sem">semester</label>
-                                    <input type="text" name="3_semester" id="m3_sem" placeholder="semester"
-                                        value="<?php echo isset($m3_semester) ? $m3_semester : '' ?>">
-                                </div>
-                                <div class="nested_box">
-                                    <label for="m3_credit">credit</label>
-                                    <input type="text" name="3_credit" id="m3_credit" placeholder="credit"
-                                        value="<?php echo isset($m3_credit) ? $m3_credit : '' ?>">
-                                </div>
-                            </div>
-                            <p class="error_msg">
-                                <?php if (isset($m1_name) && isset($m2_name) && isset($m3_name) && isset($m3_error)) {
-                                    echo $m3_error;
-                                } ?>
-                            </p>
-                        </div>
-
-
-
                         <div class="fields dates">
                             <label for="s_date" class="bdr">exam session</label>
                             <div class="select-box">
-                                <select name="e_sName" id="">
-                                    <option value="0">Select session</option>
-                                    <option value="spring" <?php if (isset($e_sName)) {
-                                        if ($e_sName == 'spring') {
-                                            echo 'selected';
-                                        }
-                                    } ?>>Spring
-                                    </option>
-                                    <option value="summer" <?php if (isset($e_sName)) {
-                                        if ($e_sName == 'summer') {
-                                            echo 'selected';
-                                        }
-                                    } ?>>Summer
-                                    </option>
-                                    <option value="fall" <?php if (isset($e_sName)) {
-                                        if ($e_sName == 'fall') {
-                                            echo 'selected';
-                                        }
-                                    } ?>>fall
-                                    </option>
-                                </select>
-
-                                <select name="e_sYear" id="">
+                                <select name="e_year" id="">
                                     <option value="0">Select year</option>
                                     <?php
                                     // $today = date("d-m-Y");
                                     // echo $today;
                                     // echo date('Y');
                                     $c_year = date('Y');
-                                    for ($i = $c_year; $i >= $c_year - 3; $i--) {
+                                    for ($i = $c_year; $i >= 2012; $i--) {
                                         ?>
-                                    <option value="<?php echo $i ?>" <?php if (isset($e_sYear)) {
-                                               if ($e_sYear == $i) {
+                                    <option value="<?php echo $i ?>" <?php if (isset($exam_year)) {
+                                               if ($exam_year == $i) {
                                                    echo 'selected';
                                                }
                                            } ?>>
@@ -634,25 +276,122 @@ if (isset($_POST['submit'])) {
                                     }
                                     ?>
                                 </select>
+                                <select name="e_session" id="">
+                                    <option value="0">Select session</option>
+                                    <option value="spring" <?php if (isset($exam_session)) {
+                                        if ($exam_session == 'spring') {
+                                            echo 'selected';
+                                        }
+                                    } ?>>Spring
+                                    </option>
+                                    <option value="summer" <?php if (isset($exam_session)) {
+                                        if ($exam_session == 'summer') {
+                                            echo 'selected';
+                                        }
+                                    } ?>>Summer
+                                    </option>
+                                    <option value="fall" <?php if (isset($exam_session)) {
+                                        if ($exam_session == 'fall') {
+                                            echo 'selected';
+                                        }
+                                    } ?>>fall
+                                    </option>
+                                </select>
+                            </div>
+                            <p class=" error_msg">
+                                <?php echo isset($exam_error) ? $exam_error : '' ?>
+                            </p>
+                        </div>
+
+
+                        <div class="members">
+                            <label for="" class="bdr">1st member</label>
+                            <div class="member_about">
+
+                                <div class="nested_box">
+                                    <label for="m1_id">id</label>
+                                    <input type="text" name="m1_id" id="m1_id" placeholder="id"
+                                        value="<?php echo isset($m1_id) ? $m1_id : '' ?>">
+                                </div>
+
+                                <div class="nested_box">
+                                    <label for="m1_marks">cgpa</label>
+                                    <input type="text" name="m1_marks" id="m1_marks" placeholder="cgpa"
+                                        value="<?php echo isset($m1_marks) ? $m1_marks : '' ?>">
+                                </div>
+                                <div class="nested_box">
+                                    <label for="m1_credit">credit</label>
+                                    <input type="text" name="m1_credit" id="m1_credit" placeholder="credit"
+                                        value="<?php echo isset($m1_credit) ? $m1_credit : '' ?>">
+                                </div>
+
                             </div>
                             <p class="error_msg">
-                                <?php echo isset($end_sess_error) ? $end_sess_error : '' ?>
+                                <?php echo isset($m1_error) ? $m1_error : '' ?>
+                            </p>
+                        </div>
+                        <div class="members">
+                            <label for="" class="bdr">2nd member</label>
+                            <div class="member_about">
+
+                                <div class="nested_box">
+                                    <label for="m2_id">id</label>
+                                    <input type="text" name="m2_id" id="m1_id" placeholder="id"
+                                        value="<?php echo isset($m2_id) ? $m2_id : '' ?>">
+                                </div>
+
+                                <div class="nested_box">
+                                    <label for="m2_marks">cgpa</label>
+                                    <input type="text" name="m2_marks" id="m2_marks" placeholder="cgpa"
+                                        value="<?php echo isset($m2_marks) ? $m2_marks : '' ?>">
+                                </div>
+                                <div class="nested_box">
+                                    <label for="m1_credit">credit</label>
+                                    <input type="text" name="m2_credit" id="m2_credit" placeholder="credit"
+                                        value="<?php echo isset($m2_credit) ? $m2_credit : '' ?>">
+                                </div>
+
+                            </div>
+                            <p class="error_msg">
+                                <?php echo isset($m2_error) ? $m2_error : '' ?>
+                            </p>
+                        </div>
+                        <div class="members">
+                            <label for="" class="bdr">3rd member</label>
+                            <div class="member_about">
+
+                                <div class="nested_box">
+                                    <label for="m3_id">id</label>
+                                    <input type="text" name="m3_id" id="m3_id" placeholder="id"
+                                        value="<?php echo isset($m3_id) ? $m3_id : '' ?>">
+                                </div>
+
+                                <div class="nested_box">
+                                    <label for="m3_marks">cgpa</label>
+                                    <input type="text" name="m3_marks" id="m3_marks" placeholder="cgpa"
+                                        value="<?php echo isset($m3_marks) ? $m3_marks : '' ?>">
+                                </div>
+                                <div class="nested_box">
+                                    <label for="m3_credit">credit</label>
+                                    <input type="text" name="m3_credit" id="m3_credit" placeholder="credit"
+                                        value="<?php echo isset($m3_credit) ? $m3_credit : '' ?>">
+                                </div>
+
+                            </div>
+                            <p class="error_msg">
+                                <?php echo isset($m3_error) ? $m3_error : '' ?>
                             </p>
                         </div>
 
                         <!-- <div class="fields">
-                            <label for="supervisor" class="bdr">Supervisor name</label>
-                            <input type="text" name="supervisor" id="supervisor" placeholder="Supervisor name">
-                        </div> -->
-
-                        <div class="fields">
                             <input type="file" name="file" id="file">
                             <label for="file"><i class="fa-solid fa-upload"></i>Choose a report...</label>
                             <span id="file-chosen"></span>
                             <p class="error_msg">
                                 <?php echo isset($file_error) ? $file_error : '' ?>
                             </p>
-                        </div>
+                        </div> -->
+
 
                         <div class="fields">
                             <input type="submit" name="submit" id="submit">

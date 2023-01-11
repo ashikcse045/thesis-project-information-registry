@@ -1,7 +1,7 @@
 <script>
-    if (window.history.replaceState) {
-        window.history.replaceState(null, null, window.location.href);
-    }
+if (window.history.replaceState) {
+    window.history.replaceState(null, null, window.location.href);
+}
 </script>
 
 <?php
@@ -101,13 +101,13 @@ if (isset($_POST['search'])) {
                                 } ?>>
                                     semester
                                 </option>
-                                <!-- <option value="exam" <?php if (isset($search_option)) {
-                                    if ($search_option === "exam") {
+                                <option value="supervisor" <?php if (isset($search_option)) {
+                                    if ($search_option === "supervisor") {
                                         echo "selected";
                                     }
                                 } ?>>
-                                    exam
-                                </option> -->
+                                    supervisor
+                                </option>
                             </select>
 
                             <input type="text" name="value" value="<?php echo isset($value) ? $value : "" ?>">
@@ -148,64 +148,77 @@ if (isset($_POST['search'])) {
                                 if (mysqli_num_rows($query) > 0) {
                                     while ($row = mysqli_fetch_array($query)) {
                                         ?>
-                                        <tr>
-                                            <td>
-                                                <a href="student_details.php?stuID=<?php echo $row['id'] ?>">
-                                                    <?php echo $row['name'] ?>
-                                                </a>
-                                            </td>
-                                            <td>
-                                                <?php echo $row['id'] ?>
-                                            </td>
-                                            <td>
-                                                <?php echo $row['semester'] ?>
-                                            </td>
-                                            <td>
-                                                <?php echo $row['title'] ?>
-                                            </td>
-                                            <td>
-                                                <?php echo $row['supervisor'] ?>
-                                            </td>
-                                            <td>
-                                                <?php echo $row['credit'] ?>
-                                            </td>
-                                        </tr>
-                                        <?php
+                            <tr>
+                                <td>
+                                    <a href="student_details.php?stuID=<?php echo $row['id'] ?>">
+                                        <?php echo $row['name'] ?>
+                                    </a>
+                                </td>
+                                <td>
+                                    <?php echo $row['id'] ?>
+                                </td>
+                                <td>
+                                    <?php echo $row['semester'] ?>
+                                </td>
+                                <td>
+                                    <?php echo $row['title'] ?>
+                                </td>
+                                <td>
+                                    <?php echo $row['supervisor'] ?>
+                                </td>
+                                <td>
+                                    <?php echo $row['credit'] ?>
+                                </td>
+                            </tr>
+                            <?php
                                     }
                                 }
                             } else {
                                 if (!empty($_POST['search_option']) && !empty($_POST['value'])) {
                                     $search_option = $_POST['search_option'];
                                     $value = htmlspecialchars($_POST['value']);
+                                    if ($search_option == "supervisor") {
+                                        $sql = "SELECT s.name, s.id, s.semester, s.title, s.supervisor, s.credit FROM students s
+                                        INNER JOIN
+                                        supervisor sv
+                                        ON s.supervisor = sv.sName
+                                        WHERE
+                                        s.supervisor LIKE '%$value%' 
+                                        OR
+                                        sv.name LIKE '%$value%'
+                                        ORDER BY $search_option ASC";
+                                    } else {
+                                        $sql = "SELECT * FROM students WHERE $search_option LIKE '%$value%' ORDER BY $search_option ASC";
+                                    }
 
-                                    $sql = "SELECT * FROM students WHERE $search_option LIKE '%$value%' ORDER BY $search_option ASC";
+
                                     $query = mysqli_query($conn, $sql);
                                     if (mysqli_num_rows($query) > 0) {
                                         while ($row = mysqli_fetch_array($query)) {
                                             ?>
-                                            <tr>
-                                                <td>
-                                                    <a href="student_details.php?stuID=<?php echo $row['id'] ?>">
-                                                        <?php echo $row['name'] ?>
-                                                    </a>
-                                                </td>
-                                                <td>
-                                                    <?php echo $row['id'] ?>
-                                                </td>
-                                                <td>
-                                                    <?php echo $row['semester'] ?>
-                                                </td>
-                                                <td>
-                                                    <?php echo $row['title'] ?>
-                                                </td>
-                                                <td>
-                                                    <?php echo $row['supervisor'] ?>
-                                                </td>
-                                                <td>
-                                                    <?php echo $row['credit'] ?>
-                                                </td>
-                                            </tr>
-                                            <?php
+                            <tr>
+                                <td>
+                                    <a href="student_details.php?stuID=<?php echo $row['id'] ?>">
+                                        <?php echo $row['name'] ?>
+                                    </a>
+                                </td>
+                                <td>
+                                    <?php echo $row['id'] ?>
+                                </td>
+                                <td>
+                                    <?php echo $row['semester'] ?>
+                                </td>
+                                <td>
+                                    <?php echo $row['title'] ?>
+                                </td>
+                                <td>
+                                    <?php echo $row['supervisor'] ?>
+                                </td>
+                                <td>
+                                    <?php echo $row['credit'] ?>
+                                </td>
+                            </tr>
+                            <?php
                                         }
                                     }
 
@@ -230,14 +243,14 @@ if (isset($_POST['search'])) {
     <script src="https://cdn.datatables.net/autofill/2.5.1/js/dataTables.autoFill.min.js"></script>
 
     <script>
-        $(document).ready(function () {
-            $('#myTable').DataTable({
-                order: [
-                    [2, 'asc']
-                ],
-                "pageLength": 25
-            });
+    $(document).ready(function() {
+        $('#myTable').DataTable({
+            order: [
+                [2, 'asc']
+            ],
+            "pageLength": 25
         });
+    });
     </script>
 
     <script src="../js/nav.js"></script>
