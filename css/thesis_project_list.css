@@ -18,3 +18,7 @@
 .container .content .content_box .list_content table tr th, td{
     padding: 5px;
 }
+
+.container .content .content_box .list_content table tr td a{
+    text-decoration: none;
+}

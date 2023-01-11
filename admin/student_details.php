@@ -19,6 +19,7 @@ if (isset($_GET['stuID'])) {
             $title = $row2['title'];
             $semester = $row2['semester'];
             $section = $row2['section'];
+            $report_file = $row2['report_file'];
             // $supervisor = $row2['supervisor'];
 
             $team = $row2['teamCode'];
@@ -115,6 +116,8 @@ if (isset($_GET['stuID'])) {
                             </tr> -->
                         </table>
                         <a href="update_student.php?stuID=<?php echo $id; ?>">click to edit</a>
+                        <a href="view_report.php?stuId=<?php echo $id; ?>" target="_blank">view thesis
+                            paper</a>
                     </div>
                     <div class="details">
                         <?php

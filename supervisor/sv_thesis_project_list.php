@@ -164,10 +164,15 @@ if (isset($_POST['search'])) {
                                         ?>
                             <tr>
                                 <td>
-                                    <?php echo $row['name'] ?>
+                                    <a href="view_report.php?stuId=<?php echo $row['id'] ?>">
+                                        <?php echo $row['name'] ?>
+                                    </a>
+
                                 </td>
                                 <td>
-                                    <?php echo $row['id'] ?>
+                                    <a href="view_report.php?stuId=<?php echo $row['id'] ?>">
+                                        <?php echo $row['id'] ?>
+                                    </a>
                                 </td>
                                 <td>
                                     <?php echo $row['title'] ?>
@@ -185,10 +190,14 @@ if (isset($_POST['search'])) {
                                         ?>
                             <tr>
                                 <td>
-                                    <?php echo $row['name'] ?>
+                                    <a href="view_report.php?stuId=<?php echo $row['id'] ?>">
+                                        <?php echo $row['name'] ?>
+                                    </a>
                                 </td>
                                 <td>
-                                    <?php echo $row['id'] ?>
+                                    <a href="view_report.php?stuId=<?php echo $row['id'] ?>">
+                                        <?php echo $row['id'] ?>
+                                    </a>
                                 </td>
                                 <td>
                                     <?php echo $row['title'] ?>

@@ -51,7 +51,7 @@ if (isset($_POST['submit'])) {
             }
             $file_name = $_FILES['report']['name'][$key];
             $basename = pathinfo($file_name, PATHINFO_FILENAME);
-            $id_list = explode('+', $basename);
+            $id_list = explode('-', $basename);
 
             $member = count($id_list);
             if ($member === 1) {
