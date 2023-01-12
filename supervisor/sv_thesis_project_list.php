@@ -90,15 +90,15 @@ if (isset($_POST['search'])) {
                 <div class="page_title">
                     <h1>
                         <i class="fa-solid fa-square-caret-right" id="side_arow"></i>
-                        thesis list
+                        thesis / project list
                     </h1>
                 </div>
 
-                <div class="filter">
+                <div class="search">
                     <form action="sv_thesis_project_list.php" method="POST">
-                        <div class="filter_option">
+                        <div class="search_option">
 
-                            <select name="search_option" id="">
+                            <select name="search_field" id="">
                                 <option value="0" <?php if (isset($search_option)) {
                                     if ($search_option === "0") {
                                         echo "selected";

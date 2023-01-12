@@ -1,3 +1,19 @@
+.container .content .content_box .search{
+    width: 100%;
+}
+
+.container .content .content_box .search .search_option{
+    width: 100%;
+    padding: 5px 5px;
+}
+.container .content .content_box .search .search_option select, input{
+    width: 100%;
+    display: block;
+    font-size: 18px;
+    padding: 6px 3px;
+    margin-bottom: 5px;
+}
+
 .container .content .content_box .list_content{
     width: 100%;
     padding: 25px 15px;
@@ -21,4 +37,47 @@
 
 .container .content .content_box .list_content table tr td a{
     text-decoration: none;
+}
+
+@media only screen and (min-width: 992px) {
+    .container .content .content_box .search{
+        width: 100%;
+    }
+    
+    .container .content .content_box .search .search_option{
+        width: 100%;
+        padding: 15px 20px;
+    }
+    .container .content .content_box .search .search_option select, input{
+        width: 25%;
+        display: inline-block;
+        font-size: 22px;
+        padding: 8px 5px;
+        margin-right: 15px;
+    }
+    
+    .container .content .content_box .list_content{
+        width: 100%;
+        padding: 25px 15px;
+    }
+    
+    .container .content .content_box .list_content table{
+        width: 100%;
+    }
+    
+    .container .content .content_box .list_content table, tr, th{
+        text-transform: capitalize;
+    }
+    .container .content .content_box .list_content table, tr, th, td{
+        border: 1px solid #000;
+        border-collapse: collapse;
+    }
+    
+    .container .content .content_box .list_content table tr th, td{
+        padding: 5px;
+    }
+    
+    .container .content .content_box .list_content table tr td a{
+        text-decoration: none;
+    }
 }
