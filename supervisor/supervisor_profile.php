@@ -65,6 +65,12 @@ $page = 'supervisor_profile';
                             <h2>marks input</h2>
                         </div>
                     </a>
+
+                    <a href="upload_report.php">
+                        <div class="box">
+                            <h2>upload thesis report</h2>
+                        </div>
+                    </a>
                 </div>
 
             </div>

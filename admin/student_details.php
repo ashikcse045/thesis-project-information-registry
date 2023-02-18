@@ -1,7 +1,7 @@
 <script>
-if (window.history.replaceState) {
-    window.history.replaceState(null, null, window.location.href);
-}
+    if (window.history.replaceState) {
+        window.history.replaceState(null, null, window.location.href);
+    }
 </script>
 
 <?php
@@ -139,18 +139,18 @@ if (isset($_GET['stuID'])) {
                                 if (mysqli_num_rows($query3) > 0) {
                                     while ($row3 = mysqli_fetch_array($query3)) {
                                         ?>
-                                <tr>
-                                    <td><?php echo $row3['semester'] ?></td>
-                                    <td>
-                                        <?php echo $row3['exam'] ?>
-                                    </td>
-                                    <td><?php echo $row3['marks'] ?></td>
-                                    <td>
-                                        <?php echo $row3['credit'] ?>
-                                    </td>
-                                    <td><?php echo $row3['supervisor'] ?></td>
-                                </tr>
-                                <?php
+                                        <tr>
+                                            <td><?php echo $row3['semester'] ?></td>
+                                            <td>
+                                                <?php echo $row3['exam'] ?>
+                                            </td>
+                                            <td><?php echo $row3['marks'] ?></td>
+                                            <td>
+                                                <?php echo $row3['credit'] ?>
+                                            </td>
+                                            <td><?php echo $row3['supervisor'] ?></td>
+                                        </tr>
+                                        <?php
                                     }
                                 }
                                 ?>
@@ -168,18 +168,18 @@ if (isset($_GET['stuID'])) {
                             if (mysqli_num_rows($query4) > 0) {
                                 while ($row4 = mysqli_fetch_array($query4)) {
                                     ?>
-                            <div class="list">
-                                <a href="student_details.php?stuID=<?php echo $row4['id']; ?>">
-                                    <span>
-                                        <?php echo $row4['id'] ?>
-                                    </span>
-                                    <span>
-                                        <?php echo $row4['name'] ?>
-                                    </span>
-                                    <!-- <h3><?php echo $row4['title'] ?></h3> -->
-                                </a>
-                            </div>
-                            <?php
+                                    <div class="list">
+                                        <a href="student_details.php?stuID=<?php echo $row4['id']; ?>">
+                                            <span>
+                                                <?php echo $row4['id'] ?>
+                                            </span>
+                                            <span>
+                                                <?php echo $row4['name'] ?>
+                                            </span>
+                                            <!-- <h3><?php echo $row4['title'] ?></h3> -->
+                                        </a>
+                                    </div>
+                                    <?php
                                 }
                             }
                             ?>

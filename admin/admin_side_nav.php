@@ -34,7 +34,7 @@ if (isset($_SESSION['ad_id'])) {
                         class="<?php echo $page === 'admin_profile' ? 'active' : ''; ?>">dashboard</a></li>
 
                 <li><a href="admin_all_list.php" class="<?php echo $page === 'all_list' ? 'active' : ''; ?>">all
-                        list</a>
+                        student</a>
                 </li>
                 <!-- <li><a href="admin_thesis_list.php">thesis list</a></li> -->
                 <!-- <li><a href="admin_project_list.php">project list</a></li> -->
@@ -42,7 +42,7 @@ if (isset($_SESSION['ad_id'])) {
                 <li><a href="students.php" class="<?php echo $page === 'students' ? 'active' : ''; ?>">supervisor
                         student's</a></li>
 
-                <li><a href="report_gen.php" class="<?php echo $page === 'report_gen' ? 'active' : ''; ?>">genarate
+                <li><a href="report_gen.php" class="<?php echo $page === 'report_gen' ? 'active' : ''; ?>">generate
                         report</a>
                 </li>
                 <li><a href="supervisor_assign.php"
